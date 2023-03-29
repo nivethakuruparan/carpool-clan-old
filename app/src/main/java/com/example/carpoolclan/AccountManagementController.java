@@ -20,4 +20,9 @@ public class AccountManagementController {
         System.out.println("Validating Login");
         return true;
     }
+
+    public Boolean validateRegistration(EditText name, EditText email, EditText dob, EditText password) {
+        System.out.println("Validating Registration");
+        return true;
+    }
 }

@@ -33,18 +33,19 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_name"
+                android:id="@+id/registration_name"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Name"
+                android:inputType="text"
                 android:drawableStart="@drawable/person"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_email"
+                android:id="@+id/registration_email"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -56,7 +57,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_dob"
+                android:id="@+id/registration_dob"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -68,7 +69,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_password"
+                android:id="@+id/registration_password"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -82,7 +83,7 @@
                 android:layout_height="60dp"
                 android:fontFamily="@font/opensans_condensed_semibold"
                 android:text="Sign Up"
-                android:id="@+id/signup_button"
+                android:id="@+id/registration_button"
                 android:textSize="28sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/amber_400"
@@ -90,7 +91,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/loginRedirectText"
+                android:id="@+id/login_page_redirect"
                 android:fontFamily="@font/opensans_semibold"
                 android:text="Already an user? Login"
                 android:layout_gravity="center"
