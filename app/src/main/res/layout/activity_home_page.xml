@@ -7,7 +7,7 @@
     android:background="@drawable/background_one"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".HomePage">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_condensed_extrabold"
-        android:text="MAIN PAGE"
+        android:text="HOME PAGE"
         android:textColor="@color/black"
         android:textSize="48sp" />
 </LinearLayout>
