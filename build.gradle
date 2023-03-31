@@ -3,3 +3,57 @@ plugins {
     id 'com.android.application' version '7.4.2' apply false
     id 'com.android.library' version '7.4.2' apply false
 }
+
+android {
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
+
+    signingConfigs {
+        debug {
+            storeFile file('keystore/example.keystore')
+            storePassword 'example'
+            keyAlias 'example_alias'
+            keyPassword 'example'
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.spotify.sdk.android.authentication.sample"
+        minSdkVersion 16
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        manifestPlaceholders = [redirectSchemeName: "spotify-sdk", redirectHostName: "auth"]
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+
+    lintOptions {
+        lintConfig file("${project.rootDir}/config/lint.xml")
+        quiet false
+        warningsAsErrors false
+        textReport true
+        textOutput 'stdout'
+        xmlReport false
+    }
+}
+
+dependencies {
+//    implementation files('../auth-lib/build/outputs/aar/auth-release.aar')
+    implementation 'com.spotify.android:auth:2.0.2'
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.3'
+}
