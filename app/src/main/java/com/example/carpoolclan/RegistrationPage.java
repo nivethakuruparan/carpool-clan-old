@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RegistrationPage extends AppCompatActivity {
 
@@ -36,6 +37,7 @@ public class RegistrationPage extends AppCompatActivity {
             }
 
             if (isValidated) {
+                Toast.makeText(getApplicationContext(), "Successfully Registered an Account", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RegistrationPage.this, HomePage.class);
                 startActivity(intent);
             }

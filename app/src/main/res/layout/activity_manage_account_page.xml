@@ -12,6 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/home_page_redirect"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:drawableLeftCompat="@drawable/back_arrow" />
@@ -45,9 +46,9 @@
                 android:textSize="18sp"
                 android:textColor="@color/gray_700"/>
             <TextView
+                android:id="@+id/account_name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_name"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="2dp"
                 android:padding="8dp"
@@ -65,9 +66,9 @@
                 android:textSize="18sp"
                 android:textColor="@color/gray_700"/>
             <TextView
+                android:id="@+id/account_email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_email"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="2dp"
                 android:padding="8dp"
@@ -85,9 +86,9 @@
                 android:textSize="18sp"
                 android:textColor="@color/gray_700"/>
             <TextView
+                android:id="@+id/account_dob"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_dob"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="2dp"
                 android:padding="8dp"
@@ -105,9 +106,9 @@
                 android:textSize="18sp"
                 android:textColor="@color/gray_700"/>
             <TextView
+                android:id="@+id/account_password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_password"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="2dp"
                 android:padding="8dp"
@@ -116,13 +117,12 @@
                 android:gravity="center_vertical"
                 android:drawablePadding="8dp"
                 app:drawableLeftCompat="@drawable/lock" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:fontFamily="@font/opensans_condensed_semibold"
                 android:text="Edit Profile"
-                android:id="@+id/signupj_button"
+                android:id="@+id/edit_account_page_redirect"
                 android:textSize="26sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/amber_400"
@@ -132,7 +132,7 @@
                 android:layout_height="60dp"
                 android:fontFamily="@font/opensans_condensed_semibold"
                 android:text="Delete Profile"
-                android:id="@+id/signupk_button"
+                android:id="@+id/delete_account_button"
                 android:textSize="26sp"
                 android:layout_marginTop="3dp"
                 android:backgroundTint="@color/amber_400"

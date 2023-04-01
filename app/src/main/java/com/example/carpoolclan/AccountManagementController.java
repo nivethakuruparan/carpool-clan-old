@@ -25,4 +25,14 @@ public class AccountManagementController {
         System.out.println("Validating Registration");
         return true;
     }
+
+    public Boolean deleteAccount() {
+        System.out.println("Deleting Account");
+        return true;
+    }
+
+    public Boolean validateEdits() {
+        System.out.println("Deleting Account");
+        return true;
+    }
 }
