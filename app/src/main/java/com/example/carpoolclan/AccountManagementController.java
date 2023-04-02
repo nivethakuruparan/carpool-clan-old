@@ -4,7 +4,7 @@ import android.widget.EditText;
 
 public class AccountManagementController {
 
-    // Checks if provided string is empty
+    // Checks if provided EditText is empty
     public Boolean checkEmptyFields(EditText field) {
         String text = field.getText().toString();
 
