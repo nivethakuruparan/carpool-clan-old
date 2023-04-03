@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    android:background="@drawable/background_four"
+    tools:context=".MakeOffersPage">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/home_page_redirect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:drawableLeftCompat="@drawable/back_arrow" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/grey_border"
+                android:orientation="vertical"
+                android:padding="24dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_condensed_extrabold"
+                    android:text="MAKE OFFER"
+                    android:textAlignment="center"
+                    android:textColor="@color/amber_400"
+                    android:textSize="48sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Step 1: Scan QR Code"
+                    android:textColor="@color/gray_700"
+                    android:textSize="18sp" />
+                <Button
+                    android:id="@+id/scan_taxi_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="2dp"
+                    android:backgroundTint="@color/slate_400"
+                    android:fontFamily="@font/opensans_condensed_semibold"
+                    android:text="Scan QR Code"
+                    android:textSize="20sp"
+                    app:cornerRadius="20dp" />
+                <TextView
+                    android:id="@+id/make_offer_taxi_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_condensed_extrabold"
+                    android:text="TAXI CODE:"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/gray_700"
+                    android:textSize="20sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Step 2: Enter Final Destination"
+                    android:textColor="@color/gray_700"
+                    android:textSize="18sp" />
+                <EditText
+                    android:id="@+id/make_offer_destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/grey_border"
+                    android:drawableStart="@drawable/location"
+                    android:drawablePadding="8dp"
+                    android:hint="Final Destination"
+                    android:inputType="textPassword"
+                    android:padding="8dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Step 3: Enter the Max Number of Passengers"
+                    android:textColor="@color/gray_700"
+                    android:textSize="18sp" />
+                <EditText
+                    android:id="@+id/make_offer_passengers"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/grey_border"
+                    android:drawableStart="@drawable/person"
+                    android:drawablePadding="8dp"
+                    android:hint="Number of Passengers"
+                    android:inputType="number"
+                    android:padding="8dp" />
+                <Button
+                    android:id="@+id/confirm_make_offer_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/amber_400"
+                    android:fontFamily="@font/opensans_condensed_semibold"
+                    android:text="Make Offer"
+                    android:textSize="26sp"
+                    app:cornerRadius="20dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

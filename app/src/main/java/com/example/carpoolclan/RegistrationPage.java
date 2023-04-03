@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 
@@ -33,10 +32,6 @@ public class RegistrationPage extends AppCompatActivity {
         registrationButton = findViewById(R.id.registration_button);
         loginPageRedirect = findViewById(R.id.login_page_redirect);
 
-        registrationButton.setOnClickListener(view -> {
-
-        });
-
         registrationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 db = FirebaseDatabase.getInstance();
@@ -58,11 +53,15 @@ public class RegistrationPage extends AppCompatActivity {
                     HelperClass helperClass = new HelperClass(name, email, dob, password);
                     reference.child(name).setValue(helperClass);
 
-                    Toast.makeText(RegistrationPage.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationPage.this, "Successfully Registered an Account", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegistrationPage.this, LoginPage.class);
                     startActivity(intent);
                 }
             }
+        });
+        loginPageRedirect.setOnClickListener(view -> {
+            Intent intent = new Intent(RegistrationPage.this, LoginPage.class);
+            startActivity(intent);
         });
     }
 }

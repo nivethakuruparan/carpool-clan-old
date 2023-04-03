@@ -9,7 +9,6 @@
     android:orientation="vertical"
     tools:context=".WelcomePage">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +16,7 @@
         android:text="Welcome To"
         android:textColor="@color/black"
         android:textSize="48sp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="240dp"
         app:drawableTopCompat="@drawable/taxi_icon" />
 
     <TextView
@@ -29,7 +28,7 @@
         android:textSize="48sp" />
 
     <Button
-        android:id="@+id/loginRedirect"
+        android:id="@+id/login_page_redirect"
         android:layout_width="280dp"
         android:layout_height="80dp"
         android:fontFamily="@font/opensans_condensed_semibold"
@@ -40,7 +39,7 @@
         app:cornerRadius = "20dp"/>
 
     <Button
-        android:id="@+id/signupRedirect"
+        android:id="@+id/registration_page_redirect"
         android:layout_width="280dp"
         android:layout_height="80dp"
         android:fontFamily="@font/opensans_condensed_semibold"

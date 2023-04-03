@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -34,6 +35,7 @@ public class LoginPage extends AppCompatActivity {
             }
 
             if (isValidated) {
+                Toast.makeText(getApplicationContext(), "Successfully Logged In", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginPage.this, HomePage.class);
                 startActivity(intent);
             }

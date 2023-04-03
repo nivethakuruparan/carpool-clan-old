@@ -12,6 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/manage_account_page_redirect"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:drawableLeftCompat="@drawable/back_arrow" />
@@ -47,11 +48,12 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_name"
+                android:id="@+id/edit_name"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="2dp"
                 android:padding="8dp"
                 android:hint="Enter new name"
+                android:inputType="text"
                 android:drawablePadding="8dp"
                 app:drawableLeftCompat="@drawable/person" />
             <TextView
@@ -65,7 +67,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_email"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="2dp"
                 android:padding="8dp"
@@ -82,16 +83,15 @@
                 android:text="DATE OF BIRTH"
                 android:textSize="18sp"
                 android:textColor="@color/gray_700"/>
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_dob"
+                android:id="@+id/edit_dob"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="2dp"
                 android:padding="8dp"
-                android:text="Cannot change D.O.B"
-                android:textSize="18sp"
-                android:gravity="center_vertical"
+                android:hint="Enter new DOB"
+                android:inputType="date"
                 android:drawablePadding="8dp"
                 app:drawableLeftCompat="@drawable/date" />
             <TextView
@@ -105,7 +105,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_password"
+                android:id="@+id/edit_password"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="2dp"
                 android:padding="8dp"
@@ -118,7 +118,7 @@
                 android:layout_height="60dp"
                 android:fontFamily="@font/opensans_condensed_semibold"
                 android:text="Confirm"
-                android:id="@+id/signupj_button"
+                android:id="@+id/confirm_edits_button"
                 android:textSize="26sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/amber_400"
