@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -18,16 +21,21 @@
         android:theme="@style/Theme.CarpoolClan"
         tools:targetApi="31">
         <activity
-            android:name=".ViewPotentialOffersPage"
-            android:exported="false" />
-        <activity
-            android:name=".MakeRequestsPage"
+            android:name=".GoogleMapsInterface"
             android:exported="true" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ViewPotentialOffersPage"
+            android:exported="false" />
+        <activity
+            android:name=".MakeRequestsPage"
+            android:exported="false">
         </activity>
         <activity
             android:name=".MakeOffersPage"
@@ -37,9 +45,7 @@
             android:exported="false" />
         <activity
             android:name=".WeatherWizardPage"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".EditAccountPage"
             android:exported="false" />
@@ -61,6 +67,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCqqMfhkofj_jcAmwEKwqQ2_ZMzmLTOE30" /> <!-- Google Maps API Key -->
     </application>
 
 </manifest>
