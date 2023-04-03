@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
 
 public class RegistrationPage extends AppCompatActivity {
 
@@ -15,6 +19,8 @@ public class RegistrationPage extends AppCompatActivity {
     EditText registrationName, registrationEmail, registrationDOB, registrationPassword;
     Button registrationButton;
     TextView loginPageRedirect;
+    FirebaseDatabase db;
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,22 +34,35 @@ public class RegistrationPage extends AppCompatActivity {
         loginPageRedirect = findViewById(R.id.login_page_redirect);
 
         registrationButton.setOnClickListener(view -> {
-            Boolean isValidated;
-            if (!accountManagement.checkEmptyFields(registrationName) | !accountManagement.checkEmptyFields(registrationEmail) | !accountManagement.checkEmptyFields(registrationDOB) | !accountManagement.checkEmptyFields(registrationPassword) ){
-                isValidated = false;
-            } else {
-                isValidated = accountManagement.validateRegistration(registrationName, registrationEmail, registrationDOB, registrationPassword);
-            }
 
-            if (isValidated) {
-                Intent intent = new Intent(RegistrationPage.this, HomePage.class);
-                startActivity(intent);
-            }
         });
 
-        loginPageRedirect.setOnClickListener(view -> {
-            Intent intent = new Intent(RegistrationPage.this, LoginPage.class);
-            startActivity(intent);
+        registrationButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                db = FirebaseDatabase.getInstance();
+                reference = db.getReference("users");
+
+                String name = registrationName.getText().toString();
+                String email = registrationEmail.getText().toString();
+                String dob = registrationDOB.getText().toString();
+                String password = registrationPassword.getText().toString();
+
+                Boolean isValidated;
+                if (!accountManagement.checkEmptyFields(registrationName) | !accountManagement.checkEmptyFields(registrationEmail) | !accountManagement.checkEmptyFields(registrationDOB) | !accountManagement.checkEmptyFields(registrationPassword) ){
+                    isValidated = false;
+                } else {
+                    isValidated = accountManagement.validateRegistration(registrationName, registrationEmail, registrationDOB, registrationPassword);
+                }
+
+                if (isValidated) {
+                    HelperClass helperClass = new HelperClass(name, email, dob, password);
+                    reference.child(name).setValue(helperClass);
+
+                    Toast.makeText(RegistrationPage.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegistrationPage.this, LoginPage.class);
+                    startActivity(intent);
+                }
+            }
         });
     }
 }
