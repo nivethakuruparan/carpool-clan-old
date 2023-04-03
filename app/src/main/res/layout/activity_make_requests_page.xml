@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_condensed_extrabold"
-                    android:text="MAKE OFFER"
+                    android:text="MAKE REQUEST"
                     android:textAlignment="center"
                     android:textColor="@color/amber_400"
                     android:textSize="48sp" />
@@ -45,28 +45,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Step 1: Scan QR Code"
+                    android:text="Step 1: Enter Starting Location"
                     android:textColor="@color/gray_700"
                     android:textSize="18sp" />
-                <Button
-                    android:id="@+id/scan_taxi_code"
+                <EditText
+                    android:id="@+id/make_request_starting_location"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
-                    android:backgroundTint="@color/slate_400"
-                    android:fontFamily="@font/opensans_condensed_semibold"
-                    android:text="Scan QR Code"
-                    android:textSize="20sp"
-                    app:cornerRadius="20dp" />
-                <TextView
-                    android:id="@+id/make_offer_taxi_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_condensed_extrabold"
-                    android:text="TAXI CODE:"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/gray_700"
-                    android:textSize="20sp" />
+                    android:background="@drawable/grey_border"
+                    android:drawableStart="@drawable/location"
+                    android:drawablePadding="8dp"
+                    android:hint="Starting Location"
+                    android:inputType="none"
+                    android:padding="8dp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,7 +68,7 @@
                     android:textColor="@color/gray_700"
                     android:textSize="18sp" />
                 <EditText
-                    android:id="@+id/make_offer_destination"
+                    android:id="@+id/make_request_destination"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
@@ -91,11 +83,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Step 3: Enter the Maximum Number of Passengers"
+                    android:text="Step 3: Number of Passengers"
                     android:textColor="@color/gray_700"
                     android:textSize="18sp" />
                 <EditText
-                    android:id="@+id/make_offer_passengers"
+                    android:id="@+id/make_request_passengers"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
@@ -105,14 +97,37 @@
                     android:hint="Number of Passengers"
                     android:inputType="number"
                     android:padding="8dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Step 4: Select a Filter"
+                    android:textColor="@color/gray_700"
+                    android:textSize="18sp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:hint="Filter Options"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/filled_exposed"
+                        android:drawableStart="@drawable/date"
+                        android:drawablePadding="8dp"
+                        android:inputType="none">
+                    </AutoCompleteTextView>
+                </com.google.android.material.textfield.TextInputLayout>
                 <Button
-                    android:id="@+id/confirm_make_offer_button"
+                    android:id="@+id/confirm_make_request_button"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
                     android:backgroundTint="@color/amber_400"
                     android:fontFamily="@font/opensans_condensed_semibold"
-                    android:text="MAKE OFFER"
+                    android:text="FIND OFFERS"
                     android:textSize="26sp"
                     app:cornerRadius="20dp" />
             </LinearLayout>

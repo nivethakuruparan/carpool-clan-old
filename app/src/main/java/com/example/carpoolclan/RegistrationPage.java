@@ -38,7 +38,7 @@ public class RegistrationPage extends AppCompatActivity {
 
             if (isValidated) {
                 Toast.makeText(getApplicationContext(), "Successfully Registered an Account", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegistrationPage.this, HomePage.class);
+                Intent intent = new Intent(RegistrationPage.this, LoginPage.class);
                 startActivity(intent);
             }
         });

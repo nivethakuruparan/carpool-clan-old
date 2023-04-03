@@ -8,7 +8,6 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".WelcomePage">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +17,6 @@
         android:textSize="48sp"
         android:layout_marginTop="240dp"
         app:drawableTopCompat="@drawable/taxi_icon" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +24,6 @@
         android:text="CarpoolClan"
         android:textColor="@color/black"
         android:textSize="48sp" />
-
     <Button
         android:id="@+id/login_page_redirect"
         android:layout_width="280dp"
@@ -37,7 +34,6 @@
         android:layout_marginTop="120dp"
         android:backgroundTint="@color/amber_400"
         app:cornerRadius = "20dp"/>
-
     <Button
         android:id="@+id/registration_page_redirect"
         android:layout_width="280dp"
@@ -48,6 +44,4 @@
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/amber_400"
         app:cornerRadius = "20dp" />
-
-
 </LinearLayout>

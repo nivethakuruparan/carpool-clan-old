@@ -69,7 +69,7 @@ public class MakeOffersPage extends AppCompatActivity {
         // let users validate their offers
         confirmMakeOffer.setOnClickListener(view -> {
             Boolean isValidated;
-            if (!dispatcher.checkEmptyQRCode(textQRCode, finalTaxiCode) | !dispatcher.checkEmptyFields(destination) | !dispatcher.checkEmptyFields(numPassengers)){
+            if (!dispatcher.checkEmptyTextView(textQRCode, finalTaxiCode) | !dispatcher.checkEmptyEditText(destination) | !dispatcher.checkEmptyEditText(numPassengers)){
                 // taxiQRCode, destination, and numPassengers cannot be empty
                 isValidated = false;
             } else {
