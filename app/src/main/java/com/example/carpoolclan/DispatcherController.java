@@ -1,5 +1,6 @@
 package com.example.carpoolclan;
 
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class DispatcherController {
 
     // validate offer; (1) taxiCode exists (2) taxiCode is not being in use,
     // (3) destination exists (4) numPassengers < capacity of taxi
-    public Boolean validateMakeOffer(String taxiQRCode, EditText destination, EditText numPassengers){
+    public Boolean validateMakeOffer(String taxiQRCode, AutoCompleteTextView destination, EditText numPassengers){
         System.out.println("Validating Make Offer");
         return true;
     }
