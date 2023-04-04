@@ -21,7 +21,7 @@ public class LocationsAPI {
 
         try {
             String sb = "https://maps.googleapis.com/maps/api/place/autocomplete/json?" + "input=" + input +
-                    "&key=";
+                    "&key=${MAPS_API_KEY}";
             URL url = new URL(sb);
             connection = (HttpURLConnection)url.openConnection();
             InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream());

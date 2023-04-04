@@ -26,19 +26,21 @@
         </activity>
         <activity
             android:name=".ViewPotentialOffersPage"
-            android:exported="false" />
-        <activity
-            android:name=".MakeRequestsPage"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".MakeOffersPage"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MakeRequestsPage"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MakeOffersPage"
+            android:exported="false" >
+
         </activity>
         <activity
             android:name=".ManagePlaylistPage"
@@ -69,7 +71,10 @@
             android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="" /> <!-- Google Maps API Key -->
+            android:value="${MAPS_API_KEY}" /> <!-- Google Maps API Key -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

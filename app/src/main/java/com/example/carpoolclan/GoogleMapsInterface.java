@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
@@ -14,6 +15,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
+
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.PolyUtil;
+
 
 public class GoogleMapsInterface extends FragmentActivity implements OnMapReadyCallback {
 
@@ -34,9 +41,17 @@ public class GoogleMapsInterface extends FragmentActivity implements OnMapReadyC
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
+        String line2 = "{qagGt_`gNmDc@`@sFbA_Oh@iIn@{JJmAjAeHDOGKi@{@cAuAUKWOgAe@oH_D_E_Ba@[iA{AcA_Bo@aAoAeB{C}DiAoAm@q@w@kA[}@";
 
-        LatLng mapIndia = new LatLng(20.5837, 78.9629);
-        this.gMap.addMarker(new MarkerOptions().position(mapIndia).title("Marker in India"));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(mapIndia));
+        List<LatLng> line1 = PolyUtil.decode(line2);
+        gMap.addPolyline(new PolylineOptions()
+                .addAll(line1)
+                .color(Color.MAGENTA));
+
+        LatLng startPnt = line1.get(0);
+        this.gMap.addMarker(new MarkerOptions().position(startPnt).title("Start point"));
+        LatLng endPnt = line1.get(line1.size()-1);
+        this.gMap.addMarker(new MarkerOptions().position(endPnt).title("End point"));
+        this.gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startPnt, 14));
     }
 }
