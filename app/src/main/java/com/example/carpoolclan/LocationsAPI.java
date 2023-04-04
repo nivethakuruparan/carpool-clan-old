@@ -1,5 +1,7 @@
 package com.example.carpoolclan;
 
+import static com.example.carpoolclan.BuildConfig.MAPS_API_KEY;
+
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -21,7 +23,7 @@ public class LocationsAPI {
 
         try {
             String sb = "https://maps.googleapis.com/maps/api/place/autocomplete/json?" + "input=" + input +
-                    "&key=${MAPS_API_KEY}";
+                    "&key=" + MAPS_API_KEY;
             URL url = new URL(sb);
             connection = (HttpURLConnection)url.openConnection();
             InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream());

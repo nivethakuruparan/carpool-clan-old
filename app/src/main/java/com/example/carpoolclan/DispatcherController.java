@@ -34,8 +34,8 @@ public class DispatcherController {
         return true;
     }
 
-    // validate request; (1) starting location exists (2) destination exists
-    public Boolean validateMakeRequest(EditText taxiQRCode, EditText destination, EditText numPassengers, String filter){
+    // validate request; (1) starting location exists (2) destination exists (3) starting location & ending location is not the same
+    public Boolean validateMakeRequest(EditText taxiQRCode, AutoCompleteTextView destination, EditText numPassengers, String filter){
         System.out.println("Validating Make Request");
         return true;
     }

@@ -72,16 +72,18 @@ public class MakeOffersPage extends AppCompatActivity {
 
 
         // let users validate their offers
+        // NOTE TO JINAL: LOL I HAVE NOT DONE THE VALIDATION PROPERLY, CUZ EVERY SINGLE THING HAS A DIFF TYPE AND IM LAZY, SO DOWN BELOW IS WRONG
+        // DO WHATEVER IS EASY FOR U, AND CHANGE UP THE METHODS IN DISPATCHER CONTROLLER
         confirmMakeOffer.setOnClickListener(view -> {
-            Boolean isValidated;
-            if (!dispatcher.checkEmptyTextView(textQRCode, finalTaxiCode) | !dispatcher.checkEmptyEditText(numPassengers)){
-                // taxiQRCode, destination, and numPassengers cannot be empty
-                isValidated = false;
-            } else {
-                // validate offer; (1) taxiCode exists (2) taxiCode is not being in use,
-                // (3) destination exists (4) numPassengers < capacity of taxi
-                isValidated = dispatcher.validateMakeOffer(finalTaxiCode, destination, numPassengers);
-            }
+            boolean isValidated = true;
+//            if (!dispatcher.checkEmptyTextView(textQRCode, finalTaxiCode) | !dispatcher.checkEmptyEditText(numPassengers)){
+//                // taxiQRCode, destination, and numPassengers cannot be empty
+//                isValidated = false;
+//            } else {
+//                // validate offer; (1) taxiCode exists (2) taxiCode is not being in use,
+//                // (3) destination exists (4) numPassengers < capacity of taxi
+//                isValidated = dispatcher.validateMakeOffer(finalTaxiCode, destination, numPassengers);
+//            }
 
             // redirect to incoming request page? or home page with the state that users have successfully made an offer
             if (isValidated) {
@@ -92,6 +94,7 @@ public class MakeOffersPage extends AppCompatActivity {
         });
     }
 
+    // helper method for QR Code Scanning
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult i = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);

@@ -37,7 +37,6 @@ public class LocationAutoComplete extends ArrayAdapter implements Filterable {
                 FilterResults filterResults = new FilterResults();
                 if(constraint != null){
                     results = placeApi.autoComplete(constraint.toString());
-
                     filterResults.values = results;
                     filterResults.count = results.size();
                 }

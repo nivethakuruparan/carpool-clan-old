@@ -48,16 +48,16 @@
                     android:text="Step 1: Enter Starting Location"
                     android:textColor="@color/gray_700"
                     android:textSize="18sp" />
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/make_request_starting_location"
+                    android:hint="Starting Location"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/grey_border"
                     android:drawableStart="@drawable/location"
                     android:drawablePadding="8dp"
-                    android:hint="Starting Location"
-                    android:padding="8dp" />
+                    android:padding="8dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,16 +66,16 @@
                     android:text="Step 2: Enter Final Destination"
                     android:textColor="@color/gray_700"
                     android:textSize="18sp" />
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/make_request_destination"
+                    android:hint="Final Destination"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/grey_border"
                     android:drawableStart="@drawable/location"
                     android:drawablePadding="8dp"
-                    android:hint="Final Destination"
-                    android:padding="8dp" />
+                    android:padding="8dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

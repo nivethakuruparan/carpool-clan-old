@@ -16,7 +16,7 @@ public class MakeRequestsPage extends AppCompatActivity {
 
     DispatcherController dispatcher = new DispatcherController();
     TextView homePageRedirect;
-    EditText startingLocation, destination, numPassengers;
+    EditText numPassengers;
     Button confirmMakeRequest;
     String[] filterOptions = {"Earliest Time", "Number of Passengers", "Intended Pickup Time"};
     String filter;
@@ -28,8 +28,8 @@ public class MakeRequestsPage extends AppCompatActivity {
 
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.filled_exposed);
         homePageRedirect = findViewById(R.id.home_page_redirect);
-        startingLocation = findViewById(R.id.make_request_starting_location);
-        destination = findViewById(R.id.make_request_destination);
+        final AutoCompleteTextView startingLocation = findViewById(R.id.make_request_starting_location);
+        final AutoCompleteTextView destination = findViewById(R.id.make_request_destination);
         numPassengers = findViewById(R.id.make_request_passengers);
         confirmMakeRequest = findViewById(R.id.confirm_make_request_button);
 
@@ -41,10 +41,7 @@ public class MakeRequestsPage extends AppCompatActivity {
         autoCompleteTextView.setAdapter(adapter);
 
         // handling clicks to the drop down menu
-        autoCompleteTextView.setOnItemClickListener((adapterView, view, i, l) -> {
-            Toast.makeText(MakeRequestsPage.this, autoCompleteTextView.getText().toString(), Toast.LENGTH_SHORT).show();
-            filter = autoCompleteTextView.getText().toString();
-        });
+        autoCompleteTextView.setOnItemClickListener((adapterView, view, i, l) -> filter = autoCompleteTextView.getText().toString());
 
         // let users go back to the home page; display an alert to notify about unsaved changes
         homePageRedirect.setOnClickListener(view -> {
@@ -65,16 +62,23 @@ public class MakeRequestsPage extends AppCompatActivity {
             alertDialog.show();
         });
 
+        // allowing autofill in order to retrieve a valid location
+        startingLocation.setAdapter(new LocationAutoComplete(MakeRequestsPage.this, android.R.layout.simple_list_item_1));
+        destination.setAdapter(new LocationAutoComplete(MakeRequestsPage.this, android.R.layout.simple_list_item_1));
+
+
         // let users validate their request
+        // NOTE TO JINAL: LOL I HAVE NOT DONE THE VALIDATION PROPERLY, CUZ EVERY SINGLE THING HAS A DIFF TYPE AND IM LAZY, SO DOWN BELOW IS WRONG
+        // DO WHATEVER IS EASY FOR U, AND CHANGE UP THE METHODS IN DISPATCHER CONTROLLER
         confirmMakeRequest.setOnClickListener(view -> {
-            Boolean isValidated;
-            if (!dispatcher.checkEmptyEditText(startingLocation) | !dispatcher.checkEmptyEditText(destination) | !dispatcher.checkEmptyEditText(numPassengers) | !dispatcher.checkEmptyTextView(autoCompleteTextView, filter)){
-                // startingLocation, destination, numPassengers, filter cannot be empty
-                isValidated = false;
-            } else {
-                // validate request; (1) starting location exists (2) destination exists
-                isValidated = dispatcher.validateMakeRequest(startingLocation, destination, numPassengers, filter);
-            }
+            boolean isValidated = true;
+//            if (!dispatcher.checkEmptyEditText(startingLocation) | !dispatcher.checkEmptyEditText(destination) | !dispatcher.checkEmptyEditText(numPassengers) | !dispatcher.checkEmptyTextView(autoCompleteTextView, filter)){
+//                // startingLocation, destination, numPassengers, filter cannot be empty
+//                isValidated = false;
+//            } else {
+//                // validate request; (1) starting location exists (2) destination exists
+//                isValidated = dispatcher.validateMakeRequest(startingLocation, destination, numPassengers, filter);
+//            }
 
             // redirect to potential offers page
             if (isValidated) {

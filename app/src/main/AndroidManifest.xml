@@ -26,16 +26,16 @@
         </activity>
         <activity
             android:name=".ViewPotentialOffersPage"
-            android:exported="true" >
+            android:exported="false" >
+        </activity>
+        <activity
+            android:name=".MakeRequestsPage"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MakeRequestsPage"
-            android:exported="false">
         </activity>
         <activity
             android:name=".MakeOffersPage"
@@ -76,5 +76,4 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
     </application>
-
 </manifest>

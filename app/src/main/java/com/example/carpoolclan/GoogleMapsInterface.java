@@ -46,7 +46,7 @@ public class GoogleMapsInterface extends FragmentActivity implements OnMapReadyC
         List<LatLng> line1 = PolyUtil.decode(line2);
         gMap.addPolyline(new PolylineOptions()
                 .addAll(line1)
-                .color(Color.MAGENTA));
+                .color(Color.CYAN));
 
         LatLng startPnt = line1.get(0);
         this.gMap.addMarker(new MarkerOptions().position(startPnt).title("Start point"));
