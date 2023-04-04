@@ -37,7 +37,7 @@
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
-                android:hint="Name"
+                android:hint="First and Last Name"
                 android:inputType="text"
                 android:drawableStart="@drawable/person"
                 android:drawablePadding="8dp"
@@ -54,9 +54,9 @@
                 android:drawableStart="@drawable/email"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+            <!--<DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/registration_dob"
                 android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
@@ -66,6 +66,21 @@
                 android:drawableStart="@drawable/date"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
+            --><androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/registration_dob"
+            android:background="@drawable/grey_border"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:hint="Select Date of Birth"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/date"
+            android:gravity="center_vertical"
+            android:fontFamily="sans-serif"
+            android:drawablePadding="8dp"
+            android:textColor="@color/black"
+            android:onClick="openDatePicker"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -93,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/login_page_redirect"
                 android:fontFamily="@font/opensans_semibold"
-                android:text="Already an user? Login"
+                android:text="Already a user? Login"
                 android:layout_gravity="center"
                 android:padding="8dp"
                 android:layout_marginTop="10dp"
