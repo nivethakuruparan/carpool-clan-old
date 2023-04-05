@@ -1,5 +1,6 @@
 package com.example.carpoolclan;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -13,6 +14,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.DatePicker;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Calendar;
 
 public class RegistrationPage extends AppCompatActivity {
@@ -22,6 +31,8 @@ public class RegistrationPage extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     Button registrationDOB, registrationButton;
     TextView loginPageRedirect;
+    FirebaseDatabase db;
+    DatabaseReference reference;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,10 +61,28 @@ public class RegistrationPage extends AppCompatActivity {
                     isValidated = false;
                 } else {
                     // validate user input
-                    //isValidated = accountManagement.validateRegistration(registrationName, registrationEmail, registrationDOB, registrationPassword);
-                    isValidated = true;
+                    isValidated = accountManagement.validateRegistration(registrationName, registrationEmail, registrationDOB, registrationPassword);
                 }
                 if (isValidated) {
+                    // now that inputs are validated, check to see if the input e-mail already exists in the database
+                    db = FirebaseDatabase.getInstance();
+                    reference = db.getReference("customers");
+                    Query checkEmailInDatabase = reference.orderByChild("email").equalTo(email);
+                    checkEmailInDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                registrationEmail.setError("An account with this e-mail already exists!");
+                            } else {
+                                registrationEmail.setError(null);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    // all inputs valid, store registration data
                     SessionController session = new SessionController();
                     session.storeRegistrationData(name, email, dob, password);
                     // display success message and redirect to login page

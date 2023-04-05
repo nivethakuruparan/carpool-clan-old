@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AccountManagementController {
-
+    SessionController session = new SessionController();
     // Checks if provided EditText is empty
     public Boolean checkEmptyFields(TextView field) {
         String text = field.getText().toString();
@@ -17,11 +17,6 @@ public class AccountManagementController {
             return false;
         }
         field.setError(null);
-        return true;
-    }
-
-    public Boolean validateLogin(EditText email, EditText password) {
-        System.out.println("Validating Login");
         return true;
     }
 
@@ -42,11 +37,7 @@ public class AccountManagementController {
             email.setError("Please enter a valid e-mail");
             return false;
         }
-        SessionController session = new SessionController();
-//        if(session.checkEmailExistence(email_text)) {
-//            email.setError("An account with this e-mail already exists.");
-//            return false;
-//        }
+
         name.setError(null);
         email.setError(null);
         dob.setError(null);
