@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ public class MakeOffersPage extends AppCompatActivity {
     TextView homePageRedirect;
     TextView textQRCode;
     String finalTaxiCode;
-    EditText destination, numPassengers;
+    EditText numPassengers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class MakeOffersPage extends AppCompatActivity {
         homePageRedirect = findViewById(R.id.home_page_redirect);
         scanQRCode = findViewById(R.id.scan_taxi_code);
         textQRCode = findViewById(R.id.make_offer_taxi_code);
-        destination = findViewById(R.id.make_offer_destination);
+        final AutoCompleteTextView destination = findViewById(R.id.make_offer_destination);
         numPassengers = findViewById(R.id.make_offer_passengers);
         confirmMakeOffer = findViewById(R.id.confirm_make_offer_button);
 
@@ -66,17 +67,23 @@ public class MakeOffersPage extends AppCompatActivity {
             i.initiateScan();
         });
 
+        // allowing autofill in order to retrieve a valid location
+        destination.setAdapter(new LocationAutoComplete(MakeOffersPage.this, android.R.layout.simple_list_item_1));
+
+
         // let users validate their offers
+        // NOTE TO JINAL: LOL I HAVE NOT DONE THE VALIDATION PROPERLY, CUZ EVERY SINGLE THING HAS A DIFF TYPE AND IM LAZY, SO DOWN BELOW IS WRONG
+        // DO WHATEVER IS EASY FOR U, AND CHANGE UP THE METHODS IN DISPATCHER CONTROLLER
         confirmMakeOffer.setOnClickListener(view -> {
-            Boolean isValidated;
-            if (!dispatcher.checkEmptyQRCode(textQRCode, finalTaxiCode) | !dispatcher.checkEmptyFields(destination) | !dispatcher.checkEmptyFields(numPassengers)){
-                // taxiQRCode, destination, and numPassengers cannot be empty
-                isValidated = false;
-            } else {
-                // validate offer; (1) taxiCode exists (2) taxiCode is not being in use,
-                // (3) destination exists (4) numPassengers < capacity of taxi
-                isValidated = dispatcher.validateMakeOffer(finalTaxiCode, destination, numPassengers);
-            }
+            boolean isValidated = true;
+//            if (!dispatcher.checkEmptyTextView(textQRCode, finalTaxiCode) | !dispatcher.checkEmptyEditText(numPassengers)){
+//                // taxiQRCode, destination, and numPassengers cannot be empty
+//                isValidated = false;
+//            } else {
+//                // validate offer; (1) taxiCode exists (2) taxiCode is not being in use,
+//                // (3) destination exists (4) numPassengers < capacity of taxi
+//                isValidated = dispatcher.validateMakeOffer(finalTaxiCode, destination, numPassengers);
+//            }
 
             // redirect to incoming request page? or home page with the state that users have successfully made an offer
             if (isValidated) {
@@ -87,6 +94,7 @@ public class MakeOffersPage extends AppCompatActivity {
         });
     }
 
+    // helper method for QR Code Scanning
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult i = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
