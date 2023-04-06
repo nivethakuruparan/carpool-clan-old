@@ -1,4 +1,4 @@
 package com.example.carpoolclan;
 
-public class rating {
+public class RatingPage {
 }
