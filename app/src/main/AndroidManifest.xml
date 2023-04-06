@@ -35,12 +35,7 @@
         </activity>
         <activity
             android:name=".MakeOffersPage"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false" >
         </activity>
         <activity
             android:name=".ManagePlaylistPage"
@@ -57,13 +52,20 @@
             android:exported="false" />
         <activity
             android:name=".ManageAccountPage"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".RegistrationPage"
             android:exported="false" />
         <activity
             android:name=".LoginPage"
-            android:exported="false"></activity>
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".WelcomePage"
             android:exported="false" />
