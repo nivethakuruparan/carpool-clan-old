@@ -84,7 +84,11 @@ public class RegistrationPage extends AppCompatActivity {
                     });
                     // all inputs valid, store registration data
                     SessionController session = new SessionController();
-                    session.storeRegistrationData(name, email, dob, password);
+                    String[] data = {name, email, dob, password};
+                    for (int i = 0; i < data.length; i++) {
+                        data[i] = session.encrypt(data[i]);
+                    }
+                    session.storeRegistrationData(data[0], data[1], data[2], data[3]);
                     // display success message and redirect to login page
                     Toast.makeText(RegistrationPage.this, "Successfully Registered an Account", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegistrationPage.this, LoginPage.class);

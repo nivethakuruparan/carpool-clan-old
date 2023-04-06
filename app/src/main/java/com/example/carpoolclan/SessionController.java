@@ -17,12 +17,22 @@ import java.util.Objects;
 public class SessionController {
     FirebaseDatabase db;
     DatabaseReference reference;
+    final String secret = "design";
+    EncryptionController encryption = new EncryptionController();
 
     protected void storeRegistrationData(String name, String email, String dob, String password) {
         db = FirebaseDatabase.getInstance();
         reference = db.getReference("customers");
         HelperClass helperClass = new HelperClass(name, email, dob, password);
         reference.child(helperClass.email).setValue(helperClass);
+    }
+
+    protected String encrypt(String input) {
+        return encryption.encrypt(input, secret);
+    }
+
+    protected String decrypt(String input) {
+        return encryption.decrypt(input, secret);
     }
 
 }

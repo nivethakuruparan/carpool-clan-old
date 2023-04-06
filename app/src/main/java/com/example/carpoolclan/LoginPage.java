@@ -19,7 +19,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginPage extends AppCompatActivity {
-
+    SessionController session = new SessionController();
     AccountManagementController accountManagement = new AccountManagementController();
     EditText loginEmail, loginPassword;
     Button loginButton;
@@ -53,7 +53,7 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public void checkCredentials() {
-        String email = loginEmail.getText().toString();
+        String email = session.encrypt(loginEmail.getText().toString());
         String password = loginPassword.getText().toString();
         HelperClass helperClass = new HelperClass();
         helperClass.setEmail(email);
@@ -65,16 +65,16 @@ public class LoginPage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     loginEmail.setError(null);
-                    String passwordFromDB = snapshot.child(helperClass.email).child("password").getValue(String.class);
+                    String passwordFromDB = session.decrypt(snapshot.child(helperClass.email).child("password").getValue(String.class));
 
                     if (passwordFromDB.equals(password)) {
                         loginEmail.setError(null);
 
                         // pass user data using intent
 
-                        String nameFromDB = snapshot.child(helperClass.email).child("name").getValue(String.class);
-                        String emailFromDB = snapshot.child(helperClass.email).child("email").getValue(String.class);
-                        String dobFromDB = snapshot.child(helperClass.email).child("dob").getValue(String.class);
+                        String nameFromDB = session.decrypt(snapshot.child(helperClass.email).child("name").getValue(String.class));
+                        String emailFromDB = session.decrypt(snapshot.child(helperClass.email).child("email").getValue(String.class));
+                        String dobFromDB = session.decrypt(snapshot.child(helperClass.email).child("dob").getValue(String.class));
 
                         Intent intent = new Intent(LoginPage.this, HomePage.class);
 

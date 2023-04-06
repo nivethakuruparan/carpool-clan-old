@@ -12,11 +12,11 @@ public class HelperClass {
     }
 
     public String getEmail() {
-        return email.replace(',','.');
+        return email.replaceAll("@", "/");
     }
 
     public void setEmail(String email) {
-        this.email = email.replace('.',',');
+        this.email = email.replaceAll("/", "@");
     }
 
     public String getDOB() {
