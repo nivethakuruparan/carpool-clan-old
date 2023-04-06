@@ -2,41 +2,46 @@ package com.example.carpoolclan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.CompoundButton;
+import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.slider.Slider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class WeatherWizardPage extends AppCompatActivity {
-    SwitchMaterial front_left, back_left, front_right, back_right;
+
+    WeatherWizardController weatherWizard = new WeatherWizardController();
+    SwitchMaterial frontLeft, backLeft, frontRight, backRight;
+    TextView homePageRedirect, temperature;
+    Slider temperatureSlider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_wizard_page);
 
-        front_left = findViewById(R.id.front_left);
-        back_left = findViewById(R.id.back_left);
-        front_right = findViewById(R.id.front_right);
-        back_right = findViewById(R.id.back_right);
+        homePageRedirect = findViewById(R.id.home_page_redirect);
 
-        handleWindowToggleButtons(front_left);
-        handleWindowToggleButtons(back_left);
-        handleWindowToggleButtons(front_right);
-        handleWindowToggleButtons(back_right);
-    }
+        frontLeft = findViewById(R.id.front_left);
+        backLeft = findViewById(R.id.back_left);
+        frontRight = findViewById(R.id.front_right);
+        backRight = findViewById(R.id.back_right);
 
-    public void handleWindowToggleButtons(SwitchMaterial toggle) {
-        toggle.setOnCheckedChangeListener((compoundButton, b) -> {
-            String display_text;
-            if (b) {
-                display_text = toggle.getTextOn().toString();
-            } else {
-                display_text = toggle.getTextOff().toString();
-            }
-            Snackbar snackbar = Snackbar
-                    .make(toggle, display_text, Snackbar.LENGTH_LONG);
-            snackbar.show();
+        temperature = findViewById(R.id.current_temperature);
+        temperatureSlider = findViewById(R.id.temperature_slider);
+
+        homePageRedirect.setOnClickListener(view -> {
+            Intent intent = new Intent(WeatherWizardPage.this, HomePage.class);
+            startActivity(intent);
         });
+
+        // displays the current temperature on to the screen
+        temperatureSlider.addOnChangeListener((slider, value, fromUser) -> temperature.setText("Current Temperature: " + value + "°C"));
+
+        // displays the current status of the windows
+        weatherWizard.handleWindowToggleButtons(frontLeft);
+        weatherWizard.handleWindowToggleButtons(backLeft);
+        weatherWizard.handleWindowToggleButtons(frontRight);
+        weatherWizard.handleWindowToggleButtons(backRight);
     }
 }

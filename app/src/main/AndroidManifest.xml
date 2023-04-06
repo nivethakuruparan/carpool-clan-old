@@ -21,37 +21,27 @@
         android:theme="@style/Theme.CarpoolClan"
         tools:targetApi="31">
         <activity
-            android:name=".GoogleMapsInterface"
+            android:name=".IncomingRequestsPage"
             android:exported="false" >
         </activity>
         <activity
+            android:name=".GoogleMapsInterface"
+            android:exported="false"></activity>
+        <activity
             android:name=".ViewPotentialOffersPage"
-            android:exported="false" >
+            android:exported="false">
         </activity>
         <activity
             android:name=".MakeRequestsPage"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MakeOffersPage"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".ManagePlaylistPage"
             android:exported="false" />
         <activity
             android:name=".WeatherWizardPage"
-            android:exported="false"></activity>
-        <activity
-            android:name=".EditAccountPage"
-            android:exported="false" />
-        <activity
-            android:name=".HomePage"
-            android:exported="false" />
-        <activity
-            android:name=".ManageAccountPage"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,6 +50,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".EditAccountPage"
+            android:exported="false" />
+        <activity
+            android:name=".HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccountPage"
+            android:exported="false"></activity>
+        <activity
             android:name=".RegistrationPage"
             android:exported="false" />
         <activity
@@ -67,11 +66,11 @@
             android:exported="false" />
         <activity
             android:name=".WelcomePage"
-            android:exported="false" >
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" /> <!-- Google Maps API Key -->
@@ -79,4 +78,5 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
     </application>
+
 </manifest>
