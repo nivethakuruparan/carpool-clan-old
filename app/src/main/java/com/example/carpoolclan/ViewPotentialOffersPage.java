@@ -7,15 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPotentialOffersPage extends AppCompatActivity implements PotentialOffersAdapter.ButtonClickListener{
+public class ViewPotentialOffersPage extends AppCompatActivity implements PotentialOffersAdapter.OffersButtonClickListener {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
@@ -86,7 +84,9 @@ public class ViewPotentialOffersPage extends AppCompatActivity implements Potent
         }
 
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged(); // constantly updates the apdater if new requests come in (NOTE FOR US: NOT SURE IF IT WILL CONSTANTLY UPDATE)
+        adapter.notifyDataSetChanged(); // constantly updates the adapter if new requests come in
+        // (NOTE FOR US: IF THE POTENTIAL OFFERS ARE CONSTANTLY GETTING ADDED JUST ADD AFTER THIS LINE)
+        // ACTUALLY MIGHT NOT WORK LOL, MIGHT HAVE TO NOTIFY ADAPTER EVERYTIME YOU ADD OR REMOVE
     }
     /*
      * Adding to the ArrayList; this array list is the one being passed into the adapter
