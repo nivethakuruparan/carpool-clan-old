@@ -21,36 +21,36 @@
         android:theme="@style/Theme.CarpoolClan"
         tools:targetApi="31">
         <activity
-            android:name=".IncomingRequestsPage"
-            android:exported="false" >
-        </activity>
-        <activity
-            android:name=".GoogleMapsInterface"
-            android:exported="false"/>
-        <activity
-            android:name=".PotentialOffersPage"
-            android:exported="true">
+            android:name=".RatingFormPage"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MakeRequestsPage"
-            android:exported="false">
+            android:name=".IncomingRequestsPage"
+            android:exported="false"></activity>
+        <activity
+            android:name=".GoogleMapsInterface"
+            android:exported="false" />
+        <activity
+            android:name=".PotentialOffersPage"
+            android:exported="true">
         </activity>
+        <activity
+            android:name=".MakeRequestsPage"
+            android:exported="false"></activity>
         <activity
             android:name=".MakeOffersPage"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".ManagePlaylistPage"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".WeatherWizardPage"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".EditAccountPage"
             android:exported="false" />
@@ -59,7 +59,7 @@
             android:exported="false" />
         <activity
             android:name=".ManageAccountPage"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".RegistrationPage"
             android:exported="false" />
@@ -68,7 +68,7 @@
             android:exported="false" />
         <activity
             android:name=".WelcomePage"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
