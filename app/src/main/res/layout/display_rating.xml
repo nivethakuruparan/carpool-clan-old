@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="4dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="7"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_weight="5"
+            android:layout_marginHorizontal="2dp">
+            <TextView
+                android:id="@+id/customer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_condensed_extrabold"
+                android:text="Customer Name"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+            <RatingBar
+                android:id="@+id/rating_score"
+                style="@android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX=".7"
+                android:scaleY=".7"
+                android:transformPivotX="0dp"
+                android:transformPivotY="0dp"
+                android:stepSize="1" />
+        </LinearLayout>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit_rating_button"
+            android:layout_weight="2"
+            android:fontFamily="@font/opensans_condensed_semibold"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:backgroundTint="@color/amber_400">
+        </Button>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

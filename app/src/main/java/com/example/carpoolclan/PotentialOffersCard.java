@@ -23,9 +23,7 @@ public class PotentialOffersCard {
         return offererID;
     }
 
-    public String getTripTime() {
-        return tripTime;
-    }
+    public String getTripTime() { return tripTime; }
 
     public String getNumPassengers() {
         return numPassengers;

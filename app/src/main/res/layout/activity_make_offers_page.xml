@@ -72,7 +72,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Step 2: Enter Final Destination"
+                    android:text="Step 2: Enter Starting Location"
+                    android:textColor="@color/gray_700"
+                    android:textSize="18sp" />
+                <AutoCompleteTextView
+                    android:id="@+id/make_offer_starting_location"
+                    android:hint="Starting Destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/grey_border"
+                    android:drawableStart="@drawable/location"
+                    android:drawablePadding="8dp"
+                    android:padding="8dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Step 3: Enter Final Destination"
                     android:textColor="@color/gray_700"
                     android:textSize="18sp" />
                 <AutoCompleteTextView
