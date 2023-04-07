@@ -45,7 +45,7 @@ class ManagePlaylistViewHolder extends RecyclerView.ViewHolder {
         artistName = itemView.findViewById(R.id.artist_name);
 
         itemView.findViewById(R.id.delete_song_button).setOnClickListener(view -> {
-            adapter.mixMaster.getSongList().remove(getAdapterPosition());
+            adapter.mixMaster.removeSong(getAdapterPosition());
             adapter.notifyItemRemoved(getAdapterPosition());
         });
     }

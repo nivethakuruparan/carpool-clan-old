@@ -2,16 +2,27 @@ package com.example.carpoolclan;
 
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MixMasterController {
 
+    SpotifyAPI spotify;
     private final List<SongCard> songList; // the list of songs that is displayed on screen
-    private SongCard currentSong; // this is the current song that is playing
 
     public MixMasterController() {
         songList = new ArrayList<>();
+
+        // to access the spotify DB
+        Thread thread = new Thread(() -> {
+            try  {
+                spotify = new SpotifyAPI();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
 
         // initial: if there are any songs in the DB add it here
         // must do this because users can leave this app, and all info will disappear??
@@ -38,13 +49,10 @@ public class MixMasterController {
     }
 
     public Boolean validateSong(String songName, String songArtist) {
-        System.out.println("Validating Song Request");
-        addSong(new SongCard(songName, songArtist, "12:00"));
-        return true;
-    }
-
-    public void displayNewCurrentSong(TextView currentSongText, TextView currentSongArtist) {
-        currentSongText.setText(currentSong.getSongName());
-        currentSongArtist.setText(currentSong.getArtistName());
+        if (spotify.validateSong(songName, songArtist)){
+            addSong(new SongCard(songName, songArtist, "12.00"));
+            return true;
+        }
+        return false;
     }
 }

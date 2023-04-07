@@ -14,9 +14,14 @@ import android.widget.TextView;
 
 public class ManagePlaylistPage extends AppCompatActivity {
 
-    MixMasterController mixMaster = new MixMasterController();
+    MixMasterController mixMaster;
     Button addSong;
     TextView homePageRedirect;
+
+    public ManagePlaylistPage() {
+        mixMaster = new MixMasterController();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
