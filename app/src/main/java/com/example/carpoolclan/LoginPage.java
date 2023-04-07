@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +18,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginPage extends AppCompatActivity {
-    SessionController session = new SessionController();
+    EncryptionController encryption = new EncryptionController();
     AccountManagementController accountManagement = new AccountManagementController();
     EditText loginEmail, loginPassword;
     Button loginButton;
@@ -53,10 +52,11 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public void checkCredentials() {
+        SessionController session = new SessionController();
         String email = session.encrypt(loginEmail.getText().toString());
         String password = loginPassword.getText().toString();
-        HelperClass helperClass = new HelperClass();
-        helperClass.setEmail(email);
+        AccountInfoHelper accountInfoHelper = new AccountInfoHelper();
+        accountInfoHelper.setEmail(email);
         reference = FirebaseDatabase.getInstance().getReference("customers");
         Query checkDatabase = reference.orderByChild("email").equalTo(email);
 
@@ -65,16 +65,16 @@ public class LoginPage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     loginEmail.setError(null);
-                    String passwordFromDB = session.decrypt(snapshot.child(helperClass.email).child("password").getValue(String.class));
+                    String passwordFromDB = session.decrypt(snapshot.child(accountInfoHelper.email).child("password").getValue(String.class));
 
                     if (passwordFromDB.equals(password)) {
                         loginEmail.setError(null);
 
                         // pass user data using intent
 
-                        String nameFromDB = session.decrypt(snapshot.child(helperClass.email).child("name").getValue(String.class));
-                        String emailFromDB = session.decrypt(snapshot.child(helperClass.email).child("email").getValue(String.class));
-                        String dobFromDB = session.decrypt(snapshot.child(helperClass.email).child("dob").getValue(String.class));
+                        String nameFromDB = session.decrypt(snapshot.child(accountInfoHelper.email).child("name").getValue(String.class));
+                        String emailFromDB = session.decrypt(snapshot.child(accountInfoHelper.email).child("email").getValue(String.class));
+                        String dobFromDB = session.decrypt(snapshot.child(accountInfoHelper.email).child("dob").getValue(String.class));
 
                         Intent intent = new Intent(LoginPage.this, HomePage.class);
 

@@ -1,6 +1,6 @@
 package com.example.carpoolclan;
 
-public class HelperClass {
+public class AccountInfoHelper {
     String name, email, dob, password;
 
     public String getName() {
@@ -35,13 +35,13 @@ public class HelperClass {
         this.password = password;
     }
 
-    public HelperClass(String name, String email, String dob, String password) {
+    public AccountInfoHelper(String name, String email, String dob, String password) {
         setName(name);
         setEmail(email);
         setDOB(dob);
         setPassword(password);
     }
 
-    public HelperClass() {
+    public AccountInfoHelper() {
     }
 }

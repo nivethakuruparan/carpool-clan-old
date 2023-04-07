@@ -20,6 +20,7 @@ public class MakeRequestsPage extends AppCompatActivity {
     Button confirmMakeRequest;
     String[] filterOptions = {"Earliest Time", "Number of Passengers", "Intended Pickup Time"};
     String filter;
+    int id = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,9 @@ public class MakeRequestsPage extends AppCompatActivity {
         // NOTE TO JINAL: LOL I HAVE NOT DONE THE VALIDATION PROPERLY, CUZ EVERY SINGLE THING HAS A DIFF TYPE AND IM LAZY, SO DOWN BELOW IS WRONG
         // DO WHATEVER IS EASY FOR U, AND CHANGE UP THE METHODS IN DISPATCHER CONTROLLER
         confirmMakeRequest.setOnClickListener(view -> {
+            String start_text = startingLocation.getText().toString();
+            String destination_text = destination.getText().toString();
+            String num_passengers_text = numPassengers.getText().toString();
             boolean isValidated = true;
 //            if (!dispatcher.checkEmptyEditText(startingLocation) | !dispatcher.checkEmptyEditText(destination) | !dispatcher.checkEmptyEditText(numPassengers) | !dispatcher.checkEmptyTextView(autoCompleteTextView, filter)){
 //                // startingLocation, destination, numPassengers, filter cannot be empty
@@ -82,10 +86,15 @@ public class MakeRequestsPage extends AppCompatActivity {
 
             // redirect to potential offers page
             if (isValidated) {
+                SessionController session = new SessionController();
+                session.storeRequestData(getID(), start_text, destination_text, num_passengers_text, filter);
                 Toast.makeText(getApplicationContext(), "Successfully Created a Request", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MakeRequestsPage.this, ViewPotentialOffersPage.class);
                 startActivity(intent);
             }
         });
+    }
+    public int getID() {
+        return id++;
     }
 }

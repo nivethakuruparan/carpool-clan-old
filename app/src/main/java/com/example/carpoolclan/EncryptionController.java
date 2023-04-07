@@ -16,6 +16,8 @@ public class EncryptionController {
     private static byte[] key;
     private static final String ALGORITHM = "AES";
 
+    final String secret = "design";
+
     public void produceSecretKey(String my_key) {
         try {
             key = my_key.getBytes(StandardCharsets.UTF_8);

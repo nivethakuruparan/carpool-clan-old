@@ -1,30 +1,29 @@
 package com.example.carpoolclan;
 
-import android.content.Intent;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
 
 public class SessionController {
-    FirebaseDatabase db;
     DatabaseReference reference;
     final String secret = "design";
     EncryptionController encryption = new EncryptionController();
 
     protected void storeRegistrationData(String name, String email, String dob, String password) {
-        db = FirebaseDatabase.getInstance();
-        reference = db.getReference("customers");
-        HelperClass helperClass = new HelperClass(name, email, dob, password);
-        reference.child(helperClass.email).setValue(helperClass);
+        reference = FirebaseDatabase.getInstance().getReference("customers");
+        AccountInfoHelper accountInfoHelper = new AccountInfoHelper(name, email, dob, password);
+        reference.child(accountInfoHelper.email).setValue(accountInfoHelper);
+    }
+
+    protected void storeOfferData(String taxi_id, String destination, String num_passengers) {
+        reference = FirebaseDatabase.getInstance().getReference("offers");
+        OfferInfoHelper offerInfoHelper = new OfferInfoHelper(taxi_id, destination, num_passengers);
+        reference.child(offerInfoHelper.id).setValue(offerInfoHelper);
+    }
+
+    protected void storeRequestData(int id, String start, String destination, String num_passengers, String filter) {
+        reference = FirebaseDatabase.getInstance().getReference("requests");
+        RequestInfoHelper requestInfoHelper = new RequestInfoHelper(id, start, destination, num_passengers, filter);
+        reference.child(String.valueOf(requestInfoHelper.id)).setValue(requestInfoHelper);
     }
 
     protected String encrypt(String input) {
