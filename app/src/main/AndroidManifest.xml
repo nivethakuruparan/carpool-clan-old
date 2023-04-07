@@ -33,7 +33,13 @@
         </activity>
         <activity
             android:name=".MakeRequestsPage"
-            android:exported="false"></activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MakeOffersPage"
             android:exported="false"></activity>
@@ -42,12 +48,8 @@
             android:exported="false" />
         <activity
             android:name=".WeatherWizardPage"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".EditAccountPage"
@@ -67,6 +69,10 @@
         <activity
             android:name=".WelcomePage"
             android:exported="false"></activity>
+        <activity android:name=".RatingPage"
+            android:exported="false">
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="false" />
