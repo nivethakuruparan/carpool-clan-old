@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,7 +22,7 @@ public class LoginPage extends AppCompatActivity {
 
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
-        loginButton = findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.make_offer);
         registrationPageRedirect = findViewById(R.id.registration_page_redirect);
 
         loginButton.setOnClickListener(view -> {

@@ -64,7 +64,7 @@
                     android:layout_height="60dp"
                     android:fontFamily="@font/opensans_condensed_semibold"
                     android:text="Login"
-                    android:id="@+id/login_button"
+                    android:id="@+id/make_offer"
                     android:textSize="28sp"
                     android:layout_marginTop="30dp"
                     android:backgroundTint="@color/amber_400"

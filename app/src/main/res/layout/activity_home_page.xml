@@ -1,27 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_one"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".HomePage">
-    <TextView
-        android:layout_width="wrap_content"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    tools:context=".LoginPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_condensed_regular"
-        android:text="Welcome To"
-        android:textColor="@color/black"
-        android:textSize="48sp"
-        android:layout_marginTop="300dp"
-        app:drawableTopCompat="@drawable/taxi_icon" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_condensed_extrabold"
-        android:text="HOME PAGE"
-        android:textColor="@color/black"
-        android:textSize="48sp" />
-</LinearLayout>
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_condensed_extrabold"
+            android:text="HOME PAGE"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="48sp"
+            android:translationY="-100dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:translationY="-100dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/grey_border"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/trip_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:padding="8dp"
+                    android:text="no current trip"
+                    android:textColor="@color/yellow_500"
+                    android:textSize="18sp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/start_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="start location"
+                    android:visibility="gone" />/>
+
+                <TextView
+                    android:id="@+id/end_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="end location"
+                    android:visibility="gone" />/>
+
+                <TextView
+                    android:id="@+id/duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="duration"
+                    android:visibility="gone" />/>
+
+                <TextView
+                    android:id="@+id/fare_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="fare cost"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/make_requests_page_redirect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/amber_400"
+            android:fontFamily="@font/opensans_condensed_semibold"
+            android:text="make a request"
+            android:textSize="28sp"
+            android:translationY="10dp"
+            android:visibility="visible"
+            app:cornerRadius="20dp" />
+
+        <Button
+            android:id="@+id/end_trip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/amber_400"
+            android:fontFamily="@font/opensans_condensed_semibold"
+            android:text="end trip"
+            android:textSize="28sp"
+            android:translationY="10dp"
+            android:visibility="gone"
+            app:cornerRadius="20dp" />
+
+        <Button
+            android:id="@+id/make_offers_page_redirect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/amber_400"
+            android:fontFamily="@font/opensans_condensed_semibold"
+            android:text="make an offer"
+            android:textSize="28sp"
+            android:translationY="10dp"
+            app:cornerRadius="20dp" />
+
+        <Button
+            android:id="@+id/manage_playlist_page_redirect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/amber_400"
+            android:fontFamily="@font/opensans_condensed_semibold"
+            android:text="Mixmaster"
+            android:textSize="28sp"
+            android:translationY="10dp"
+            android:visibility="gone"
+            app:cornerRadius="20dp" />
+
+        <Button
+            android:id="@+id/trip_simulation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="trip simulation toggle"
+            android:translationY="40dp" />
+
+    </LinearLayout>
+</ScrollView>
