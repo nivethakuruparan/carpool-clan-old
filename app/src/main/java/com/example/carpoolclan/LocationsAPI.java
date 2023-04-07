@@ -2,8 +2,6 @@ package com.example.carpoolclan;
 
 import static com.example.carpoolclan.BuildConfig.MAPS_API_KEY;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,8 +32,6 @@ public class LocationsAPI {
             while ((read=inputStreamReader.read(buff)) != -1) {
                 jsonResult.append(buff,0,read);
             }
-
-            Log.d("JSon",jsonResult.toString());
         } catch (IOException e){
             e.printStackTrace();
         } finally {
@@ -43,7 +39,6 @@ public class LocationsAPI {
                 connection.disconnect();
             }
         }
-
         try {
             JSONObject jsonObject=new JSONObject(jsonResult.toString());
             JSONArray prediction=jsonObject.getJSONArray("predictions");
@@ -54,8 +49,6 @@ public class LocationsAPI {
         catch (JSONException e){
             e.printStackTrace();
         }
-
         return arrayList;
     }
-
 }

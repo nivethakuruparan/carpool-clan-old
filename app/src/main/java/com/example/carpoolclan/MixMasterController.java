@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MixMasterController {
-
     SpotifyAPI spotify;
     private final List<SongCard> songList; // the list of songs that is displayed on screen
 
@@ -26,22 +25,23 @@ public class MixMasterController {
 
         // initial: if there are any songs in the DB add it here
         // must do this because users can leave this app, and all info will disappear??
+
     }
 
-    public List<SongCard> getSongList() {
-        return songList;
+    public SongCard getSong(int position) {
+        return songList.get(position);
     }
 
     public void addSong(SongCard song) {
+        // CODE: add this song to the DB
+        System.out.println("Adding: " + song.getSongName());
         songList.add(song);
-
-        // add this song to the DB
     }
 
     public void removeSong(int position) {
+        // CODE: remove this song from the DB
+        System.out.println("Removing: " + songList.get(position).getSongName());
         songList.remove(position);
-
-        // remove this song from the DB
     }
 
     public int getSongListSize() {
@@ -50,7 +50,7 @@ public class MixMasterController {
 
     public Boolean validateSong(String songName, String songArtist) {
         if (spotify.validateSong(songName, songArtist)){
-            addSong(new SongCard(songName, songArtist, "12.00"));
+            addSong(new SongCard(songName, songArtist));
             return true;
         }
         return false;

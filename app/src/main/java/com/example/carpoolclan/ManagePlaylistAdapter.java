@@ -25,13 +25,13 @@ public class ManagePlaylistAdapter extends RecyclerView.Adapter<ManagePlaylistVi
 
     @Override
     public void onBindViewHolder(@NonNull ManagePlaylistViewHolder holder, int position) {
-        holder.songName.setText(mixMaster.getSongList().get(position).getSongName());
-        holder.artistName.setText(mixMaster.getSongList().get(position).getArtistName());
+        holder.songName.setText(mixMaster.getSong(position).getSongName());
+        holder.artistName.setText(mixMaster.getSong(position).getArtistName());
     }
 
     @Override
     public int getItemCount() {
-        return mixMaster.getSongList().size();
+        return mixMaster.getSongListSize();
     }
 }
 

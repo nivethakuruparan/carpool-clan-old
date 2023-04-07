@@ -17,11 +17,11 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class MakeOffersPage extends AppCompatActivity {
 
-    DispatcherController dispatcher = new DispatcherController();
+    DispatcherController dispatcher;
     Button scanQRCode, confirmMakeOffer;
-    TextView homePageRedirect;
-    TextView textQRCode;
+    TextView homePageRedirect, textQRCode;
     String finalTaxiCode;
+    AutoCompleteTextView startingLocation, destination;
     EditText numPassengers;
 
     @Override
@@ -29,15 +29,20 @@ public class MakeOffersPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_offers_page);
 
+        //initializing dispatcher
+        dispatcher = new DispatcherController();
+
         // initialize variables with corresponding IDs
         homePageRedirect = findViewById(R.id.home_page_redirect);
         scanQRCode = findViewById(R.id.scan_taxi_code);
         textQRCode = findViewById(R.id.make_offer_taxi_code);
-        final AutoCompleteTextView destination = findViewById(R.id.make_offer_destination);
+        startingLocation = findViewById(R.id.make_offer_starting_location);
+        destination = findViewById(R.id.make_offer_destination);
         numPassengers = findViewById(R.id.make_offer_passengers);
         confirmMakeOffer = findViewById(R.id.confirm_make_offer_button);
 
-        finalTaxiCode = ""; // initialize as empty string to store taxi code
+        // initialize as empty string to store taxi code; since taxiQRCode has the form: "Taxi Code: {taxi_id}"
+        finalTaxiCode = "";
 
         // let users go back to the home page; display an alert to notify about unsaved changes
         homePageRedirect.setOnClickListener(view -> {
@@ -68,29 +73,14 @@ public class MakeOffersPage extends AppCompatActivity {
         });
 
         // allowing autofill in order to retrieve a valid location
+        startingLocation.setAdapter(new LocationAutoComplete(MakeOffersPage.this, android.R.layout.simple_list_item_1));
         destination.setAdapter(new LocationAutoComplete(MakeOffersPage.this, android.R.layout.simple_list_item_1));
 
-
-        // let users validate their offers
-        // NOTE TO JINAL: LOL I HAVE NOT DONE THE VALIDATION PROPERLY, CUZ EVERY SINGLE THING HAS A DIFF TYPE AND IM LAZY, SO DOWN BELOW IS WRONG
-        // DO WHATEVER IS EASY FOR U, AND CHANGE UP THE METHODS IN DISPATCHER CONTROLLER
+        // handling confirm make offer button click
         confirmMakeOffer.setOnClickListener(view -> {
-            boolean isValidated = true;
-//            if (!dispatcher.checkEmptyTextView(textQRCode, finalTaxiCode) | !dispatcher.checkEmptyEditText(numPassengers)){
-//                // taxiQRCode, destination, and numPassengers cannot be empty
-//                isValidated = false;
-//            } else {
-//                // validate offer; (1) taxiCode exists (2) taxiCode is not being in use,
-//                // (3) destination exists (4) numPassengers < capacity of taxi
-//                isValidated = dispatcher.validateMakeOffer(finalTaxiCode, destination, numPassengers);
-//            }
-
-            // redirect to incoming request page? or home page with the state that users have successfully made an offer
-            if (isValidated) {
-                Toast.makeText(getApplicationContext(), "Successfully Created an Offer", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MakeOffersPage.this, HomePage.class);
-                startActivity(intent);
-            }
+            // CODE: once confirm make offer button has been made
+            // NOTE: remember to check for empty fields
+            System.out.println("Clicking Make Offer");
         });
     }
 

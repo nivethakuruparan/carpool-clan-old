@@ -1,14 +1,12 @@
 package com.example.carpoolclan;
 
 public class SongCard {
-    String songName;
-    String artistName;
-    String duration;
+    private String songName;
+    private String artistName;
 
-    public SongCard(String songName, String artistName, String duration) {
+    public SongCard(String songName, String artistName) {
         this.songName = songName;
         this.artistName = artistName;
-        this.duration = duration;
     }
 
     public String getSongName() {
@@ -19,7 +17,4 @@ public class SongCard {
         return artistName;
     }
 
-    public String getDuration() {
-        return duration;
-    }
 }
