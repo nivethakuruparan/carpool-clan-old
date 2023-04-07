@@ -12,11 +12,11 @@ import android.widget.Toast;
 
 public class PotentialOffersPage extends AppCompatActivity {
 
-    DDispatcherController dispatcher;
+    DispatcherController dispatcher;
     TextView homePageRedirect;
 
     public PotentialOffersPage() {
-        this.dispatcher = new DDispatcherController();
+        this.dispatcher = new DispatcherController();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class PotentialOffersPage extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.potential_offers_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        PPotentialOffersAdapter adapter = new PPotentialOffersAdapter(dispatcher);
+        PotentialOffersAdapter adapter = new PotentialOffersAdapter(dispatcher);
         recyclerView.setAdapter(adapter);
 
         homePageRedirect = findViewById(R.id.home_page_redirect);

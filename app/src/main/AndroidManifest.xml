@@ -23,22 +23,12 @@
         <activity
             android:name=".IncomingRequestsPage"
             android:exported="false" >
-
         </activity>
         <activity
             android:name=".GoogleMapsInterface"
             android:exported="false"/>
         <activity
             android:name=".PotentialOffersPage"
-            android:exported="false">
-
-        </activity>
-        <activity
-            android:name=".MakeRequestsPage"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".MakeOffersPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,8 +36,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MakeRequestsPage"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MakeOffersPage"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".ManagePlaylistPage"
             android:exported="false" >
+
         </activity>
         <activity
             android:name=".WeatherWizardPage"

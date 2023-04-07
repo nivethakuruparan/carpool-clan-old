@@ -1,14 +1,11 @@
 package com.example.carpoolclan;
 
-import android.widget.TextView;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MixMasterController {
     SpotifyAPI spotify;
-    private final List<SongCard> songList; // the list of songs that is displayed on screen
+    private static List<SongCard> songList; // the list of songs that is displayed on screen
 
     public MixMasterController() {
         songList = new ArrayList<>();
