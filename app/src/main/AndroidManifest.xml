@@ -59,7 +59,8 @@
             android:exported="false" />
         <activity
             android:name=".RegistrationPage"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".LoginPage"
             android:exported="false" />

@@ -1,14 +1,13 @@
 package com.example.carpoolclan;
 
 public class RequestInfoHelper {
-    int id;
-    String start, destination, num_passengers, filter;
+    String id, start, destination, num_passengers, filter;
 
-    public int getID() {
+    public String getID() {
         return id;
     }
 
-    public void setID(int id) {
+    public void setID(String id) {
         this.id = id;
     }
 
@@ -44,7 +43,7 @@ public class RequestInfoHelper {
         this.filter = filter;
     }
 
-    public RequestInfoHelper(int id, String start, String destination, String num_passengers, String filter) {
+    public RequestInfoHelper(String id, String start, String destination, String num_passengers, String filter) {
         setID(id);
         setStart(start);
         setDestination(destination);
