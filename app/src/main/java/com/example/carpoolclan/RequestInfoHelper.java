@@ -4,11 +4,11 @@ public class RequestInfoHelper {
     String id, start, destination, num_passengers, filter;
 
     public String getID() {
-        return id;
+        return id.replaceAll("@", "/");
     }
 
     public void setID(String id) {
-        this.id = id;
+        this.id = id.replaceAll("/","@");
     }
 
     public String getStart() {

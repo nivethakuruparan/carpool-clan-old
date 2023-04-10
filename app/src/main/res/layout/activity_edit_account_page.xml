@@ -87,17 +87,21 @@
                     android:text="DATE OF BIRTH"
                     android:textSize="18sp"
                     android:textColor="@color/gray_700"/>
-                <EditText
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/edit_dob"
                     android:background="@drawable/grey_border"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="20dp"
                     android:padding="8dp"
                     android:hint="Enter new DOB"
-                    android:inputType="date"
+                    android:textSize="18sp"
+                    android:drawableLeft="@drawable/date"
+                    android:gravity="center_vertical"
+                    android:fontFamily="sans-serif"
                     android:drawablePadding="8dp"
-                    app:drawableLeftCompat="@drawable/date" />
+                    android:textColor="@color/black"
+                    android:onClick="openDatePicker"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

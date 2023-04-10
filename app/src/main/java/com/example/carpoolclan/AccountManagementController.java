@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AccountManagementController {
-    SessionController session = new SessionController();
     // Checks if provided TextView is empty
     public Boolean checkEmptyFields(TextView field) {
         String text = field.getText().toString();
@@ -125,8 +124,8 @@ public class AccountManagementController {
         return true;
     }
 
-    public Boolean validateEdits() {
+    public Boolean validateEdits(EditText name, Button dob, EditText password) {
         System.out.println("Validating Edits");
-        return true;
+        return validateName(name) & validateDOB(dob) & validatePassword(password);
     }
 }

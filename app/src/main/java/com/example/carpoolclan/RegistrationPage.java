@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -48,48 +47,46 @@ public class RegistrationPage extends AppCompatActivity {
         registrationButton = findViewById(R.id.registration_button);
         loginPageRedirect = findViewById(R.id.login_page_redirect);
 
-        registrationButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                String name = registrationName.getText().toString();
+        registrationButton.setOnClickListener(view -> {
+            Boolean isValidated;
+            if (!accountManagement.checkEmptyFields(registrationName) | !accountManagement.checkEmptyFields(registrationEmail) | !accountManagement.checkEmptyFields(registrationDOB) | !accountManagement.checkEmptyFields(registrationPassword) ){
+                // check for any empty fields
+                isValidated = false;
+            } else {
+                // validate user input
+                isValidated = accountManagement.validateRegistration(registrationName, registrationEmail, registrationDOB, registrationPassword);
+            }
+            if (isValidated) {
+                // now that inputs are validated, check to see if the input e-mail already exists in the database
                 String email = registrationEmail.getText().toString();
+                db = FirebaseDatabase.getInstance();
+                reference = db.getReference("customers");
+                Query checkEmailInDatabase = reference.orderByChild("email").equalTo(email);
+                checkEmailInDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            registrationEmail.setError("An account with this e-mail already exists!");
+                        } else {
+                            registrationEmail.setError(null);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                // all inputs valid, store registration data
+                String name = registrationName.getText().toString();
                 String dob = registrationDOB.getText().toString();
                 String password = registrationPassword.getText().toString();
 
-                Boolean isValidated;
-                if (!accountManagement.checkEmptyFields(registrationName) | !accountManagement.checkEmptyFields(registrationEmail) | !accountManagement.checkEmptyFields(registrationDOB) | !accountManagement.checkEmptyFields(registrationPassword) ){
-                    // check for any empty fields
-                    isValidated = false;
-                } else {
-                    // validate user input
-                    isValidated = accountManagement.validateRegistration(registrationName, registrationEmail, registrationDOB, registrationPassword);
-                }
-                if (isValidated) {
-                    // now that inputs are validated, check to see if the input e-mail already exists in the database
-                    db = FirebaseDatabase.getInstance();
-                    reference = db.getReference("customers");
-                    Query checkEmailInDatabase = reference.orderByChild("email").equalTo(email);
-                    checkEmailInDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                registrationEmail.setError("An account with this e-mail already exists!");
-                            } else {
-                                registrationEmail.setError(null);
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    // all inputs valid, store registration data
-                    SessionController session = new SessionController();
-                    session.storeRegistrationData(name, email, dob, password);
-                    // display success message and redirect to login page
-                    Toast.makeText(RegistrationPage.this, "Successfully Registered an Account", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegistrationPage.this, LoginPage.class);
-                    startActivity(intent);
-                }
+                SessionController session = new SessionController();
+                session.storeRegistrationData(name, email, dob, password);
+                // display success message and redirect to login page
+                Toast.makeText(RegistrationPage.this, "Successfully Registered an Account", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RegistrationPage.this, LoginPage.class);
+                startActivity(intent);
             }
         });
 
@@ -100,13 +97,10 @@ public class RegistrationPage extends AppCompatActivity {
     }
 
     private void initDatePicker() {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month += 1;
-                String date = makeDateString(day, month, year);
-                registrationDOB.setText(date);
-            }
+        DatePickerDialog.OnDateSetListener dateSetListener = (datePicker, year, month, day) -> {
+            month += 1;
+            String date = makeDateString(day, month, year);
+            registrationDOB.setText(date);
         };
 
         Calendar cal = Calendar.getInstance();

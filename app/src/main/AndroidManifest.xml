@@ -25,21 +25,21 @@
             android:exported="false" >
         </activity>
         <activity
-            android:name=".ViewPotentialOffersPage"
+            android:name=".IncomingRequestsPage"
             android:exported="false" >
         </activity>
         <activity
             android:name=".MakeRequestsPage"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MakeOffersPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MakeOffersPage"
-            android:exported="false" >
         </activity>
         <activity
             android:name=".ManagePlaylistPage"
@@ -63,12 +63,16 @@
         </activity>
         <activity
             android:name=".LoginPage"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".WelcomePage"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GenerateRequestsPage"
             android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MakeRequestsPage extends AppCompatActivity {
 
     DispatcherController dispatcher;
@@ -21,7 +23,7 @@ public class MakeRequestsPage extends AppCompatActivity {
     Button confirmMakeRequest;
     String[] filterOptions = {"Shortest Time", "Number of Passengers", "Lowest Fare"};
     String filter;
-    int id = 1;
+    Random rand = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +97,12 @@ public class MakeRequestsPage extends AppCompatActivity {
                 SessionController session = new SessionController();
                 session.storeRequestData(getID(), start_text, destination_text, num_passengers_text, filter);
                 Toast.makeText(getApplicationContext(), "Successfully Created a Request", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MakeRequestsPage.this, ViewPotentialOffersPage.class);
+                Intent intent = new Intent(MakeRequestsPage.this, PotentialOffersPage.class);
                 startActivity(intent);
             }
         });
     }
     public int getID() {
-        return id++;
+        return rand.nextInt(999999);
     }
 }

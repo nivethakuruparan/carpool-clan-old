@@ -4,11 +4,11 @@ public class OfferInfoHelper {
     String id, destination, num_passengers;
 
     public String getID() {
-        return id;
+        return id.replaceAll("@", "/");
     }
 
     public void setID(String id) {
-        this.id = id;
+        this.id = id.replaceAll("/","@");
     }
 
     public String getDestination() {

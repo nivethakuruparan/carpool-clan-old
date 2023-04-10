@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginPage extends AppCompatActivity {
-    EncryptionController encryption = new EncryptionController();
     AccountManagementController accountManagement = new AccountManagementController();
     EditText loginEmail, loginPassword;
     Button loginButton;
@@ -34,14 +32,11 @@ public class LoginPage extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         registrationPageRedirect = findViewById(R.id.registration_page_redirect);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!accountManagement.checkEmptyFields(loginEmail) | !accountManagement.checkEmptyFields(loginPassword)) {
+        loginButton.setOnClickListener(view -> {
+            if (!accountManagement.checkEmptyFields(loginEmail) | !accountManagement.checkEmptyFields(loginPassword)) {
 
-                } else {
-                    checkCredentials();
-                }
+            } else {
+                checkCredentials();
             }
         });
 
