@@ -12,7 +12,6 @@ import android.widget.Toast;
 public class RatingFormPage extends AppCompatActivity {
 
     TripDurationController tripDuration;
-    TextView homePageRedirect;
 
     public RatingFormPage() {
         this.tripDuration = new TripDurationController();
@@ -27,14 +26,5 @@ public class RatingFormPage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RatingFormAdapter adapter = new RatingFormAdapter(tripDuration);
         recyclerView.setAdapter(adapter);
-
-        homePageRedirect = findViewById(R.id.home_page_redirect);
-
-        // let users go back to the home page, normally
-        homePageRedirect.setOnClickListener(view -> {
-            Toast.makeText(getApplicationContext(), "Left Rating Form Page", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(RatingFormPage.this, HomePage.class);
-            startActivity(intent);
-        });
     }
 }
