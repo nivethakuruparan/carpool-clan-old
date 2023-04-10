@@ -5,8 +5,19 @@ import com.google.firebase.database.DatabaseReference;
 
 public class SessionController {
     DatabaseReference reference;
-    final String secret = "design";
-    EncryptionController encryption = new EncryptionController();
+    final String secret;
+    EncryptionController encryption;
+    private static Boolean tripStatus; // false for no trip; true for current trip
+    private static String customerType; // "offerer, requester"
+    private static String polyLine; // current polyLine being used on the trip
+
+    public SessionController() {
+        secret = "design";
+        encryption = new EncryptionController();
+        tripStatus = true;
+        customerType = "offerer";
+        polyLine = "{qagGt_`gNmDc@`@sFbA_Oh@iIn@{JJmAjAeHDOGKi@{@cAuAUKWOgAe@oH_D_E_Ba@[iA{AcA_Bo@aAoAeB{C}DiAoAm@q@w@kA[}@";
+    }
 
     protected void storeRegistrationData(String name, String email, String dob, String password) {
         reference = FirebaseDatabase.getInstance().getReference("customers");
@@ -34,18 +45,6 @@ public class SessionController {
         return encryption.decrypt(input, secret);
     }
 
-public class SessionController {
-
-    private static Boolean tripStatus; // false for no trip; true for current trip
-    private static String customerType; // "offerer, requester"
-    private static String polyLine; // current polyLine being used on the trip
-
-    public SessionController() {
-        tripStatus = true;
-        customerType = "offerer";
-        polyLine = "{qagGt_`gNmDc@`@sFbA_Oh@iIn@{JJmAjAeHDOGKi@{@cAuAUKWOgAe@oH_D_E_Ba@[iA{AcA_Bo@aAoAeB{C}DiAoAm@q@w@kA[}@";
-    }
-
     public static Boolean getTripStatus() {
         return tripStatus;
     }
@@ -69,3 +68,4 @@ public class SessionController {
         SessionController.polyLine = polyLine;
     }
 }
+

@@ -30,20 +30,6 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         getUserData();
-    }
-
-    public void getUserData() {
-        Intent intent = getIntent();
-
-        String nameUser = intent.getStringExtra("name");
-        String emailUser = intent.getStringExtra("email");
-        String dobUser = intent.getStringExtra("dob");
-        String passwordUser = intent.getStringExtra("password");
-
-        userInfo.put("name", nameUser);
-        userInfo.put("email", emailUser);
-        userInfo.put("dob", dobUser);
-        userInfo.put("password", passwordUser);
 
         // setting up IDs from XML
         manageAccountPageRedirect = findViewById(R.id.manage_account_page_redirect);
@@ -172,5 +158,19 @@ public class HomePage extends AppCompatActivity {
             fare.setText("$10.21");
             destination.setText("1280 Main St W, Hamilton, ON L8S 4L8");
         }
+    }
+
+    public void getUserData() {
+        Intent intent = getIntent();
+
+        String nameUser = intent.getStringExtra("name");
+        String emailUser = intent.getStringExtra("email");
+        String dobUser = intent.getStringExtra("dob");
+        String passwordUser = intent.getStringExtra("password");
+
+        userInfo.put("name", nameUser);
+        userInfo.put("email", emailUser);
+        userInfo.put("dob", dobUser);
+        userInfo.put("password", passwordUser);
     }
 }
