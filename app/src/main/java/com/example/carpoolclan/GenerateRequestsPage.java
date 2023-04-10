@@ -24,7 +24,7 @@ public class GenerateRequestsPage extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_generate_requests);
+        setContentView(R.layout.activity_generate_requests_page);
         //getUserData();
 
         SessionController session = new SessionController();
