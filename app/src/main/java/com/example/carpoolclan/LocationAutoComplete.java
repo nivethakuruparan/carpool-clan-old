@@ -31,7 +31,7 @@ public class LocationAutoComplete extends ArrayAdapter implements Filterable {
 
     @Override
     public Filter getFilter() {
-        Filter filter = new Filter() {
+        return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
@@ -44,16 +44,14 @@ public class LocationAutoComplete extends ArrayAdapter implements Filterable {
             }
 
             @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                if(results != null && results.count > 0){
+            protected void publishResults(CharSequence constraint, FilterResults results1) {
+                if(results1 != null && results1.count > 0){
                     notifyDataSetChanged();
                 }
                 else{
                     notifyDataSetInvalidated();
                 }
-
             }
         };
-        return filter;
     }
 }

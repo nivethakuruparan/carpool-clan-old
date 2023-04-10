@@ -14,11 +14,12 @@ import android.widget.Toast;
 
 public class MakeRequestsPage extends AppCompatActivity {
 
-    DispatcherController dispatcher = new DispatcherController();
+    DispatcherController dispatcher;
     TextView homePageRedirect;
     EditText numPassengers;
+    AutoCompleteTextView dropDownMenu, startingLocation, destination;
     Button confirmMakeRequest;
-    String[] filterOptions = {"Earliest Time", "Number of Passengers", "Intended Pickup Time"};
+    String[] filterOptions = {"Shortest Time", "Number of Passengers", "Lowest Fare"};
     String filter;
     int id = 1;
 
@@ -27,22 +28,27 @@ public class MakeRequestsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_requests_page);
 
-        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.filled_exposed);
+        //initializing dispatcher
+        dispatcher = new DispatcherController();
+
+        // initialize variables with corresponding IDs
+        dropDownMenu = findViewById(R.id.filled_exposed);
         homePageRedirect = findViewById(R.id.home_page_redirect);
-        final AutoCompleteTextView startingLocation = findViewById(R.id.make_request_starting_location);
-        final AutoCompleteTextView destination = findViewById(R.id.make_request_destination);
+        startingLocation = findViewById(R.id.make_request_starting_location);
+        destination = findViewById(R.id.make_request_destination);
         numPassengers = findViewById(R.id.make_request_passengers);
         confirmMakeRequest = findViewById(R.id.confirm_make_request_button);
 
-        filter = ""; // initialize as empty string to store filter option
+        // initialize as empty string to store filter selection
+        filter = "";
 
         // setting up the drop down menu display
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MakeRequestsPage.this,
                 android.R.layout.simple_spinner_dropdown_item, filterOptions);
-        autoCompleteTextView.setAdapter(adapter);
+        dropDownMenu.setAdapter(adapter);
 
-        // handling clicks to the drop down menu
-        autoCompleteTextView.setOnItemClickListener((adapterView, view, i, l) -> filter = autoCompleteTextView.getText().toString());
+        // handling clicks to the drop down menu; saving result to filter
+        dropDownMenu.setOnItemClickListener((adapterView, view, i, l) -> filter = dropDownMenu.getText().toString());
 
         // let users go back to the home page; display an alert to notify about unsaved changes
         homePageRedirect.setOnClickListener(view -> {
