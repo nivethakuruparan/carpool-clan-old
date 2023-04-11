@@ -3,6 +3,7 @@ package com.example.carpoolclan;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.accounts.Account;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,17 +18,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditAccountPage extends AppCompatActivity {
-    private final Map<String, String> userInfo = new HashMap<>();
-    AccountManagementController accountManagement = new AccountManagementController();
+    private final Map<String, String> userInfo;
+    SessionController session;
+    AccountManagementController accountManagement;
     TextView manageAccountPageRedirect;
     EditText editName, editPassword;
     DatePickerDialog datePickerDialog;
     Button editDOB, confirmEdits;
+    public EditAccountPage() {
+        this.session = new SessionController();
+        this.userInfo = session.getUserInfo();
+        this.accountManagement = new AccountManagementController();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account_page);
-        getUserData();
         initDatePicker();
 
         manageAccountPageRedirect = findViewById(R.id.manage_account_page_redirect);
@@ -49,7 +55,6 @@ public class EditAccountPage extends AppCompatActivity {
             builder.setPositiveButton("Yes", (dialog, which) -> {
                 Toast.makeText(getApplicationContext(), "Your changes have not been saved", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(EditAccountPage.this, ManageAccountPage.class);
-                putUserData(intent);
                 startActivity(intent);
             });
 
@@ -61,7 +66,7 @@ public class EditAccountPage extends AppCompatActivity {
 
         confirmEdits.setOnClickListener(view -> {
             Boolean isValidated;
-            if (!accountManagement.checkEmptyFields(editName) | !accountManagement.checkEmptyFields(editDOB) | !accountManagement.checkEmptyFields(editPassword)){
+            if (!accountManagement.checkEmptyFields(editName) | !accountManagement.checkEmptyFields(editDOB) | !accountManagement.checkEmptyFields(editPassword)) {
                 // check for any empty fields
                 isValidated = false;
             } else {
@@ -74,41 +79,16 @@ public class EditAccountPage extends AppCompatActivity {
                 String dob = editDOB.getText().toString();
                 String password = editPassword.getText().toString();
 
-                SessionController session = new SessionController();
                 session.storeRegistrationData(name, userInfo.get("email"), dob, password);
+                session.updateUserInfo(name, dob, password);
                 // display success message and redirect to manage account page
-                userInfo.put("name", name);
-                userInfo.put("dob", dob);
-                userInfo.put("password", password);
-
                 Toast.makeText(getApplicationContext(), "Your changes have been saved", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(EditAccountPage.this, ManageAccountPage.class);
-                putUserData(intent);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "There was an error with your changes", Toast.LENGTH_LONG).show();
             }
         });
-    }
-    public void getUserData() {
-        Intent intent = getIntent();
-
-        String nameUser = intent.getStringExtra("name");
-        String emailUser = intent.getStringExtra("email");
-        String dobUser = intent.getStringExtra("dob");
-        String passwordUser = intent.getStringExtra("password");
-
-        userInfo.put("name", nameUser);
-        userInfo.put("email", emailUser);
-        userInfo.put("dob", dobUser);
-        userInfo.put("password", passwordUser);
-    }
-
-    public void putUserData(Intent intent) {
-        intent.putExtra("name", userInfo.get("name"));
-        intent.putExtra("email", userInfo.get("email"));
-        intent.putExtra("dob", userInfo.get("dob"));
-        intent.putExtra("password", userInfo.get("password"));
     }
 
     private void initDatePicker() {

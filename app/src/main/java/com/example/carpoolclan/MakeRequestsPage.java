@@ -20,7 +20,8 @@ import java.util.Map;
 import java.util.Random;
 
 public class MakeRequestsPage extends AppCompatActivity {
-    private final Map<String, String> userInfo = new HashMap<>();
+    private final Map<String, String> userInfo;
+    SessionController session;
     DispatcherController dispatcher;
     TextView homePageRedirect;
     EditText numPassengers;
@@ -29,12 +30,14 @@ public class MakeRequestsPage extends AppCompatActivity {
     String[] filterOptions = {"Shortest Time", "Number of Passengers", "Lowest Fare"};
     String filter;
     Random rand = new Random();
-
+    public MakeRequestsPage() {
+        session = new SessionController();
+        userInfo = session.getUserInfo();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_requests_page);
-        getUserData();
 
         //initializing dispatcher
         dispatcher = new DispatcherController();
@@ -95,21 +98,30 @@ public class MakeRequestsPage extends AppCompatActivity {
 
             // redirect to generate offers page
             if (isValidated) {
+                String request_id = String.valueOf(getID());
                 String start_text = startingLocation.getText().toString();
                 String destination_text = destination.getText().toString();
                 String num_passengers_text = numPassengers.getText().toString();
 
-                SessionController session = new SessionController();
                 String current_time = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     current_time = ZonedDateTime
                             .now(ZoneId.systemDefault())
                             .format(DateTimeFormatter.ofPattern("uuuu.MM.dd.HH.mm.ss"));
                 }
-                session.storeRequestData(getID(), userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text, filter);
+
+                session.storeRequestData(request_id, userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text, filter);
                 Toast.makeText(getApplicationContext(), "Successfully Created a Request", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MakeRequestsPage.this, GenerateOffersPage.class);
-                putUserData(intent);
+
+                intent.putExtra("requestID", request_id);
+                intent.putExtra("customerID", userInfo.get("email"));
+                intent.putExtra("time", current_time);
+                intent.putExtra("start", start_text);
+                intent.putExtra("destination", destination_text);
+                intent.putExtra("numPassengers", num_passengers_text);
+                intent.putExtra("filter", filter);
+
                 startActivity(intent);
             }
         });
@@ -117,26 +129,5 @@ public class MakeRequestsPage extends AppCompatActivity {
     public int getID() {
         // return random 6 digit number for request id
         return rand.nextInt(999999-111111)+111111;
-    }
-
-    public void getUserData() {
-        Intent intent = getIntent();
-
-        String nameUser = intent.getStringExtra("name");
-        String emailUser = intent.getStringExtra("email");
-        String dobUser = intent.getStringExtra("dob");
-        String passwordUser = intent.getStringExtra("password");
-
-        userInfo.put("name", nameUser);
-        userInfo.put("email", emailUser);
-        userInfo.put("dob", dobUser);
-        userInfo.put("password", passwordUser);
-    }
-
-    public void putUserData(Intent intent) {
-        intent.putExtra("name", userInfo.get("name"));
-        intent.putExtra("email", userInfo.get("email"));
-        intent.putExtra("dob", userInfo.get("dob"));
-        intent.putExtra("password", userInfo.get("password"));
     }
 }
