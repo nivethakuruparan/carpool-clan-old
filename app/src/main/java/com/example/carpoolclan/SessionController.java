@@ -17,7 +17,7 @@ public class SessionController {
     public SessionController() {
         secret = "design";
         encryption = new EncryptionController();
-        tripStatus = false;
+        tripStatus = true;
         customerType = "offerer";
         polyLine = "{qagGt_`gNmDc@`@sFbA_Oh@iIn@{JJmAjAeHDOGKi@{@cAuAUKWOgAe@oH_D_E_Ba@[iA{AcA_Bo@aAoAeB{C}DiAoAm@q@w@kA[}@";
     }
@@ -37,7 +37,31 @@ public class SessionController {
     protected void storeRequestData(String request_id, String customer_id, String time, String start, String destination, String num_passengers, String filter) {
         reference = FirebaseDatabase.getInstance().getReference("requests");
         RequestInfoHelper requestInfoHelper = new RequestInfoHelper(encrypt(request_id), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers), encrypt(filter));
-        reference.child(String.valueOf(requestInfoHelper.requestID)).setValue(requestInfoHelper);
+        reference.child(requestInfoHelper.requestID).setValue(requestInfoHelper);
+    }
+
+    protected void storeWeatherWizardData(String taxi_id, String frontLeft, String backLeft, String frontRight, String backRight, String temp) {
+        reference = FirebaseDatabase.getInstance().getReference("weatherwizard");
+        WeatherWizardInfoHelper weatherWizardInfoHelper = new WeatherWizardInfoHelper(encrypt(taxi_id), encrypt(frontLeft), encrypt(backLeft), encrypt(frontRight), encrypt(backRight), encrypt(temp));
+        reference.child(weatherWizardInfoHelper.taxiID).setValue(weatherWizardInfoHelper);
+    }
+
+    protected void storeMixMasterData(String tripID, SongCard songCard) {
+        String index = songCard.getIndex();
+        String songName = songCard.getSongName();
+        String artistName = songCard.getArtistName();
+        reference = FirebaseDatabase.getInstance().getReference("mixmaster");
+        MixMasterInfoHelper mixMasterInfoHelper = new MixMasterInfoHelper(encrypt(tripID), encrypt(index), encrypt(songName), encrypt(artistName));
+        reference.child(mixMasterInfoHelper.tripID).child(mixMasterInfoHelper.index).setValue(mixMasterInfoHelper);
+    }
+
+    protected void removeMixMasterData(String tripID, SongCard songCard) {
+        String index = songCard.getIndex();
+        reference = FirebaseDatabase.getInstance().getReference("mixmaster");
+        MixMasterInfoHelper mixMasterInfoHelper = new MixMasterInfoHelper();
+        mixMasterInfoHelper.setTripID(encrypt(tripID));
+        mixMasterInfoHelper.setIndex(encrypt(index));
+        reference.child(mixMasterInfoHelper.tripID).child(mixMasterInfoHelper.index).removeValue();
     }
 
     protected void deleteAccount(String email) {
