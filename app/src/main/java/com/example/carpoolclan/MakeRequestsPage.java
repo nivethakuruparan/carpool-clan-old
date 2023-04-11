@@ -82,24 +82,24 @@ public class MakeRequestsPage extends AppCompatActivity {
         destination.setAdapter(new LocationAutoComplete(MakeRequestsPage.this, android.R.layout.simple_list_item_1));
 
 
-        // let users validate their request
-        // NOTE TO JINAL: LOL I HAVE NOT DONE THE VALIDATION PROPERLY, CUZ EVERY SINGLE THING HAS A DIFF TYPE AND IM LAZY, SO DOWN BELOW IS WRONG
-        // DO WHATEVER IS EASY FOR U, AND CHANGE UP THE METHODS IN DISPATCHER CONTROLLER
+        // validate user request
         confirmMakeRequest.setOnClickListener(view -> {
-            String start_text = startingLocation.getText().toString();
-            String destination_text = destination.getText().toString();
-            String num_passengers_text = numPassengers.getText().toString();
-            boolean isValidated = true;
-//            if (!dispatcher.checkEmptyEditText(startingLocation) | !dispatcher.checkEmptyEditText(destination) | !dispatcher.checkEmptyEditText(numPassengers) | !dispatcher.checkEmptyTextView(autoCompleteTextView, filter)){
-//                // startingLocation, destination, numPassengers, filter cannot be empty
-//                isValidated = false;
-//            } else {
-//                // validate request; (1) starting location exists (2) destination exists
-//                isValidated = dispatcher.validateMakeRequest(startingLocation, destination, numPassengers, filter);
-//            }
+            Boolean isValidated;
+            if (!dispatcher.checkEmptyFields(startingLocation) | !dispatcher.checkEmptyFields(destination) | !dispatcher.checkEmptyFields(numPassengers) | !dispatcher.checkEmptyFields(dropDownMenu)){
+                // startingLocation, destination, numPassengers, filter cannot be empty
+                isValidated = false;
+            } else {
+                // validate request; 0 <= numPassengers <= capacity (4)
+                int num_passengers = Integer.getInteger(numPassengers.getText().toString());
+                isValidated = dispatcher.validateUserInput(num_passengers);
+            }
 
-            // redirect to potential offers page
+            // redirect to generate offers page
             if (isValidated) {
+                String start_text = startingLocation.getText().toString();
+                String destination_text = destination.getText().toString();
+                String num_passengers_text = numPassengers.getText().toString();
+
                 SessionController session = new SessionController();
                 String current_time = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

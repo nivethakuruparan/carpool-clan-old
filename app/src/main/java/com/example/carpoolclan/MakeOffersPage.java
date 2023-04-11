@@ -86,23 +86,23 @@ public class MakeOffersPage extends AppCompatActivity {
 
         // handling confirm make offer button click
         confirmMakeOffer.setOnClickListener(view -> {
-            String id_text = finalTaxiCode;
-            String start_text = startingLocation.getText().toString();
-            String destination_text = destination.getText().toString();
-            String num_passengers_text = numPassengers.getText().toString();
-
-            boolean isValidated = true;
-//            if (!dispatcher.checkEmptyTextView(textQRCode, finalTaxiCode) | !dispatcher.checkEmptyEditText(numPassengers)){
-//                // taxiQRCode, destination, and numPassengers cannot be empty
-//                isValidated = false;
-//            } else {
-//                // validate offer; (1) taxiCode exists (2) taxiCode is not being in use,
-//                // (3) destination exists (4) numPassengers < capacity of taxi
-//                isValidated = dispatcher.validateMakeOffer(finalTaxiCode, destination, numPassengers);
-//            }
+            Boolean isValidated;
+            if (!dispatcher.checkEmptyFields(textQRCode) | !dispatcher.checkEmptyFields(startingLocation) | !dispatcher.checkEmptyFields(destination) | !dispatcher.checkEmptyFields(numPassengers)){
+                // no fields can be empty
+                isValidated = false;
+            } else {
+                // validate offer; 0 <= numPassengers <= capacity (4)
+                int num_passengers = Integer.getInteger(numPassengers.getText().toString());
+                isValidated = dispatcher.validateUserInput(num_passengers);
+            }
 
             // redirect to incoming request page? or home page with the state that users have successfully made an offer
             if (isValidated) {
+                String id_text = finalTaxiCode;
+                String start_text = startingLocation.getText().toString();
+                String destination_text = destination.getText().toString();
+                String num_passengers_text = numPassengers.getText().toString();
+
                 SessionController session = new SessionController();
                 String current_time = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -110,10 +110,9 @@ public class MakeOffersPage extends AppCompatActivity {
                             .now(ZoneId.systemDefault())
                             .format(DateTimeFormatter.ofPattern("uuuu.MM.dd.HH.mm.ss"));
                 }
-                System.out.println(userInfo.get("email"));
                 session.storeOfferData(id_text, userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text);
                 Toast.makeText(getApplicationContext(), "Successfully Created an Offer", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MakeOffersPage.this, GenerateOffersPage.class);
+                Intent intent = new Intent(MakeOffersPage.this, MakeOffersPage.class);
                 putUserData(intent);
                 startActivity(intent);
             }
