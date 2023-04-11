@@ -11,8 +11,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ManageAccountPage extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
 
+public class ManageAccountPage extends AppCompatActivity {
+    private final Map<String, String> userInfo = new HashMap<>();
     AccountManagementController accountManagement = new AccountManagementController();
     TextView homePageRedirect;
     Button editAccountRedirect, deleteAccountButton;
@@ -20,6 +23,7 @@ public class ManageAccountPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_account_page);
+        getUserData();
 
         homePageRedirect = findViewById(R.id.home_page_redirect);
         editAccountRedirect = findViewById(R.id.edit_account_page_redirect);
@@ -27,11 +31,23 @@ public class ManageAccountPage extends AppCompatActivity {
 
         homePageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(ManageAccountPage.this, HomePage.class);
+
+            intent.putExtra("name", userInfo.get("name"));
+            intent.putExtra("email", userInfo.get("email"));
+            intent.putExtra("dob", userInfo.get("dob"));
+            intent.putExtra("password", userInfo.get("password"));
+
             startActivity(intent);
         });
 
         editAccountRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(ManageAccountPage.this, EditAccountPage.class);
+
+            intent.putExtra("name", userInfo.get("name"));
+            intent.putExtra("email", userInfo.get("email"));
+            intent.putExtra("dob", userInfo.get("dob"));
+            intent.putExtra("password", userInfo.get("password"));
+
             startActivity(intent);
         });
 
@@ -45,6 +61,12 @@ public class ManageAccountPage extends AppCompatActivity {
                 if (accountManagement.deleteAccount()) {
                     Toast.makeText(getApplicationContext(), "Successfully Deleted Account", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(ManageAccountPage.this, WelcomePage.class);
+
+                    intent.putExtra("name", userInfo.get("name"));
+                    intent.putExtra("email", userInfo.get("email"));
+                    intent.putExtra("dob", userInfo.get("dob"));
+                    intent.putExtra("password", userInfo.get("password"));
+
                     startActivity(intent);
                 }
             });
@@ -54,5 +76,18 @@ public class ManageAccountPage extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         });
+    }
+    public void getUserData() {
+        Intent intent = getIntent();
+
+        String nameUser = intent.getStringExtra("name");
+        String emailUser = intent.getStringExtra("email");
+        String dobUser = intent.getStringExtra("dob");
+        String passwordUser = intent.getStringExtra("password");
+
+        userInfo.put("name", nameUser);
+        userInfo.put("email", emailUser);
+        userInfo.put("dob", dobUser);
+        userInfo.put("password", passwordUser);
     }
 }

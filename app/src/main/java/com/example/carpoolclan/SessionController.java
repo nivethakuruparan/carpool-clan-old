@@ -27,6 +27,7 @@ public class SessionController {
 
     protected void storeOfferData(String taxi_id, String customer_id, String time, String start, String destination, String num_passengers) {
         reference = FirebaseDatabase.getInstance().getReference("offers");
+        System.out.println(customer_id);
         OfferInfoHelper offerInfoHelper = new OfferInfoHelper(encrypt(taxi_id), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers));
         reference.child(offerInfoHelper.taxiID).setValue(offerInfoHelper);
     }

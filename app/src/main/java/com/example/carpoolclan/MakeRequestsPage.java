@@ -113,6 +113,8 @@ public class MakeRequestsPage extends AppCompatActivity {
 
                 intent.putExtra("name", userInfo.get("name"));
                 intent.putExtra("email", userInfo.get("email"));
+                intent.putExtra("dob", userInfo.get("dob"));
+                intent.putExtra("password", userInfo.get("password"));
 
                 startActivity(intent);
             }
@@ -128,8 +130,12 @@ public class MakeRequestsPage extends AppCompatActivity {
 
         String nameUser = intent.getStringExtra("name");
         String emailUser = intent.getStringExtra("email");
+        String dobUser = intent.getStringExtra("dob");
+        String passwordUser = intent.getStringExtra("password");
 
         userInfo.put("name", nameUser);
         userInfo.put("email", emailUser);
+        userInfo.put("dob", dobUser);
+        userInfo.put("password", passwordUser);
     }
 }

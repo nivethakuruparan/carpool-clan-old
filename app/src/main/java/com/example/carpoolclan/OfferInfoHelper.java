@@ -11,7 +11,7 @@ public class OfferInfoHelper {
         this.taxiID = taxi_id.replaceAll("/","@");
     }
 
-    public String customerID() {
+    public String getCustomerID() {
         return customerID;
     }
 

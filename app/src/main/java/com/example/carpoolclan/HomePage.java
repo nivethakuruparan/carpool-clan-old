@@ -72,6 +72,8 @@ public class HomePage extends AppCompatActivity {
 
             intent.putExtra("name", userInfo.get("name"));
             intent.putExtra("email", userInfo.get("email"));
+            intent.putExtra("dob", userInfo.get("dob"));
+            intent.putExtra("password", userInfo.get("password"));
 
             startActivity(intent);
         });
@@ -82,6 +84,8 @@ public class HomePage extends AppCompatActivity {
 
             intent.putExtra("name", userInfo.get("name"));
             intent.putExtra("email", userInfo.get("email"));
+            intent.putExtra("dob", userInfo.get("dob"));
+            intent.putExtra("password", userInfo.get("password"));
 
             startActivity(intent);
         });
