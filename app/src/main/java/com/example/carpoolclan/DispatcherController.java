@@ -1,5 +1,9 @@
 package com.example.carpoolclan;
 
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +20,27 @@ public class DispatcherController {
         // i.e. there will be no empty potential offers page
         addingPotentialOffers();
         addingIncomingRequests();
+    }
+
+    public Boolean checkEmptyFields(TextView field) {
+        String text = field.getText().toString();
+
+        if (text.isEmpty()) {
+            field.setError("Field cannot be empty!");
+            return false;
+        }
+        field.setError(null);
+        return true;
+    }
+
+    public Boolean validateUserInput(EditText numPassengers) {
+        int num_passengers = Integer.parseInt(numPassengers.getText().toString());
+        if (2 <= num_passengers & num_passengers <= 4) {
+            numPassengers.setError(null);
+            return true;
+        }
+        numPassengers.setError("Please enter a valid number of passengers");
+        return false;
     }
 
     public PotentialOffersCard getPotentialOffer(int position) {

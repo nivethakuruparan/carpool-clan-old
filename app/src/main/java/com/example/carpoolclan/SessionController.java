@@ -1,15 +1,55 @@
 package com.example.carpoolclan;
 
-public class SessionController {
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
 
+public class SessionController {
+    DatabaseReference reference;
+    final String secret;
+    EncryptionController encryption;
     private static Boolean tripStatus; // false for no trip; true for current trip
     private static String customerType; // "offerer, requester"
     private static String polyLine; // current polyLine being used on the trip
 
     public SessionController() {
-        tripStatus = true;
+        secret = "design";
+        encryption = new EncryptionController();
+        tripStatus = false;
         customerType = "offerer";
         polyLine = "{qagGt_`gNmDc@`@sFbA_Oh@iIn@{JJmAjAeHDOGKi@{@cAuAUKWOgAe@oH_D_E_Ba@[iA{AcA_Bo@aAoAeB{C}DiAoAm@q@w@kA[}@";
+    }
+
+    protected void storeRegistrationData(String name, String email, String dob, String password) {
+        reference = FirebaseDatabase.getInstance().getReference("customers");
+        AccountInfoHelper accountInfoHelper = new AccountInfoHelper(encrypt(name), encrypt(email), encrypt(dob), encrypt(password));
+        reference.child(accountInfoHelper.email).setValue(accountInfoHelper);
+    }
+
+    protected void storeOfferData(String taxi_id, String customer_id, String time, String start, String destination, String num_passengers) {
+        reference = FirebaseDatabase.getInstance().getReference("offers");
+        OfferInfoHelper offerInfoHelper = new OfferInfoHelper(encrypt(taxi_id), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers));
+        reference.child(offerInfoHelper.taxiID).setValue(offerInfoHelper);
+    }
+
+    protected void storeRequestData(int request_id, String customer_id, String time, String start, String destination, String num_passengers, String filter) {
+        reference = FirebaseDatabase.getInstance().getReference("requests");
+        RequestInfoHelper requestInfoHelper = new RequestInfoHelper(encrypt(String.valueOf(request_id)), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers), encrypt(filter));
+        reference.child(String.valueOf(requestInfoHelper.requestID)).setValue(requestInfoHelper);
+    }
+
+    protected void deleteAccount(String email) {
+        reference = FirebaseDatabase.getInstance().getReference("customers");
+        AccountInfoHelper accountInfoHelper = new AccountInfoHelper();
+        accountInfoHelper.setEmail(encrypt(email));
+        reference.child(accountInfoHelper.email).removeValue();
+    }
+
+    protected String encrypt(String input) {
+        return encryption.encrypt(input, secret);
+    }
+
+    protected String decrypt(String input) {
+        return encryption.decrypt(input, secret);
     }
 
     public static Boolean getTripStatus() {
@@ -35,3 +75,4 @@ public class SessionController {
         SessionController.polyLine = polyLine;
     }
 }
+

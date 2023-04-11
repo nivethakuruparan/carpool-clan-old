@@ -15,8 +15,14 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class MakeOffersPage extends AppCompatActivity {
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
+public class MakeOffersPage extends AppCompatActivity {
+    private final Map<String, String> userInfo = new HashMap<>();
     DispatcherController dispatcher;
     Button scanQRCode, confirmMakeOffer;
     TextView homePageRedirect, textQRCode;
@@ -28,6 +34,7 @@ public class MakeOffersPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_offers_page);
+        getUserData();
 
         //initializing dispatcher
         dispatcher = new DispatcherController();
@@ -54,6 +61,7 @@ public class MakeOffersPage extends AppCompatActivity {
             builder.setPositiveButton("Yes", (dialog, which) -> {
                 Toast.makeText(getApplicationContext(), "Your changes have not been saved", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MakeOffersPage.this, HomePage.class);
+                putUserData(intent);
                 startActivity(intent);
             });
 
@@ -78,9 +86,35 @@ public class MakeOffersPage extends AppCompatActivity {
 
         // handling confirm make offer button click
         confirmMakeOffer.setOnClickListener(view -> {
-            // CODE: once confirm make offer button has been made
-            // NOTE: remember to check for empty fields
-            System.out.println("Clicking Make Offer");
+            Boolean isValidated;
+            if (!dispatcher.checkEmptyFields(textQRCode) | !dispatcher.checkEmptyFields(startingLocation) | !dispatcher.checkEmptyFields(destination) | !dispatcher.checkEmptyFields(numPassengers)){
+                // no fields can be empty
+                isValidated = false;
+            } else {
+                // validate offer; 2 <= numPassengers <= capacity (4)
+                isValidated = dispatcher.validateUserInput(numPassengers);
+            }
+
+            // redirect to incoming request page? or home page with the state that users have successfully made an offer
+            if (isValidated) {
+                String id_text = finalTaxiCode;
+                String start_text = startingLocation.getText().toString();
+                String destination_text = destination.getText().toString();
+                String num_passengers_text = numPassengers.getText().toString();
+
+                SessionController session = new SessionController();
+                String current_time = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    current_time = ZonedDateTime
+                            .now(ZoneId.systemDefault())
+                            .format(DateTimeFormatter.ofPattern("uuuu.MM.dd.HH.mm.ss"));
+                }
+                session.storeOfferData(id_text, userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text);
+                Toast.makeText(getApplicationContext(), "Successfully Created an Offer", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MakeOffersPage.this, MakeOffersPage.class);
+                putUserData(intent);
+                startActivity(intent);
+            }
         });
     }
 
@@ -97,5 +131,26 @@ public class MakeOffersPage extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void getUserData() {
+        Intent intent = getIntent();
+
+        String nameUser = intent.getStringExtra("name");
+        String emailUser = intent.getStringExtra("email");
+        String dobUser = intent.getStringExtra("dob");
+        String passwordUser = intent.getStringExtra("password");
+
+        userInfo.put("name", nameUser);
+        userInfo.put("email", emailUser);
+        userInfo.put("dob", dobUser);
+        userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 }

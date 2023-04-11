@@ -11,7 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class HomePage extends AppCompatActivity {
+    private final Map<String, String> userInfo = new HashMap<>();
 
     TripDurationController tripDuration;
     TextView manageAccountPageRedirect, tripStatus, customerType, customerID, tripTime, numPassengers, fare, destination;
@@ -25,6 +29,7 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        getUserData();
 
         // setting up IDs from XML
         manageAccountPageRedirect = findViewById(R.id.manage_account_page_redirect);
@@ -52,18 +57,21 @@ public class HomePage extends AppCompatActivity {
         // let users go back to the manage account page, normally
         manageAccountPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, ManageAccountPage.class);
+            putUserData(intent);
             startActivity(intent);
         });
 
         // let users go back to the make offer page, normally
         makeOffersPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MakeOffersPage.class);
+            putUserData(intent);
             startActivity(intent);
         });
 
         // let users go back to the make requests page, normally
         makeRequestsPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MakeRequestsPage.class);
+            putUserData(intent);
             startActivity(intent);
         });
 
@@ -153,5 +161,26 @@ public class HomePage extends AppCompatActivity {
             fare.setText("$10.21");
             destination.setText("1280 Main St W, Hamilton, ON L8S 4L8");
         }
+    }
+
+    public void getUserData() {
+        Intent intent = getIntent();
+
+        String nameUser = intent.getStringExtra("name");
+        String emailUser = intent.getStringExtra("email");
+        String dobUser = intent.getStringExtra("dob");
+        String passwordUser = intent.getStringExtra("password");
+
+        userInfo.put("name", nameUser);
+        userInfo.put("email", emailUser);
+        userInfo.put("dob", dobUser);
+        userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 }

@@ -9,7 +9,7 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" />
+        android:required="false"/>
 
     <application
         android:allowBackup="true"
@@ -21,51 +21,53 @@
         android:theme="@style/Theme.CarpoolClan"
         tools:targetApi="31">
         <activity
-            android:name=".RatingFormPage"
+            android:name=".GoogleMapsInterface"
             android:exported="false" >
         </activity>
         <activity
             android:name=".IncomingRequestsPage"
-            android:exported="false"></activity>
-        <activity
-            android:name=".GoogleMapsInterface"
-            android:exported="false" />
-        <activity
-            android:name=".PotentialOffersPage"
-            android:exported="false">
-
+            android:exported="false" >
         </activity>
         <activity
+            android:name=".PotentialOffersPage"
+            android:exported="false" />
+        <activity
             android:name=".MakeRequestsPage"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".MakeOffersPage"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".ManagePlaylistPage"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".WeatherWizardPage"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".EditAccountPage"
             android:exported="false" />
         <activity
             android:name=".HomePage"
-            android:exported="false" >
+            android:exported="false"
         </activity>
+
         <activity
             android:name=".ManageAccountPage"
             android:exported="false" />
         <activity
             android:name=".RegistrationPage"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".LoginPage"
-            android:exported="false" />
+            android:exported="false"
+        </activity>
         <activity
             android:name=".WelcomePage"
-            android:exported="true">
+            android:exported="true"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -75,7 +77,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".GenerateOffersPage"
+            android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" /> <!-- Google Maps API Key -->

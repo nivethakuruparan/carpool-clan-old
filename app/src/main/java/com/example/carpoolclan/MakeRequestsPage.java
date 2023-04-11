@@ -12,8 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MakeRequestsPage extends AppCompatActivity {
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
+public class MakeRequestsPage extends AppCompatActivity {
+    private final Map<String, String> userInfo = new HashMap<>();
     DispatcherController dispatcher;
     TextView homePageRedirect;
     EditText numPassengers;
@@ -21,11 +28,13 @@ public class MakeRequestsPage extends AppCompatActivity {
     Button confirmMakeRequest;
     String[] filterOptions = {"Shortest Time", "Number of Passengers", "Lowest Fare"};
     String filter;
+    Random rand = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_requests_page);
+        getUserData();
 
         //initializing dispatcher
         dispatcher = new DispatcherController();
@@ -72,11 +81,62 @@ public class MakeRequestsPage extends AppCompatActivity {
         startingLocation.setAdapter(new LocationAutoComplete(MakeRequestsPage.this, android.R.layout.simple_list_item_1));
         destination.setAdapter(new LocationAutoComplete(MakeRequestsPage.this, android.R.layout.simple_list_item_1));
 
-        // handling confirm find offers button click
+
+        // validate user request
         confirmMakeRequest.setOnClickListener(view -> {
-            // CODE: once confirm make offer button has been made
-            // NOTE: remember to check for empty fields
-            System.out.println("Clicking Make Request");
+            Boolean isValidated;
+            if (!dispatcher.checkEmptyFields(startingLocation) | !dispatcher.checkEmptyFields(destination) | !dispatcher.checkEmptyFields(numPassengers) | !dispatcher.checkEmptyFields(dropDownMenu)){
+                // startingLocation, destination, numPassengers, filter cannot be empty
+                isValidated = false;
+            } else {
+                // validate request; 2 <= numPassengers <= capacity (4)
+                isValidated = dispatcher.validateUserInput(numPassengers);
+            }
+
+            // redirect to generate offers page
+            if (isValidated) {
+                String start_text = startingLocation.getText().toString();
+                String destination_text = destination.getText().toString();
+                String num_passengers_text = numPassengers.getText().toString();
+
+                SessionController session = new SessionController();
+                String current_time = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    current_time = ZonedDateTime
+                            .now(ZoneId.systemDefault())
+                            .format(DateTimeFormatter.ofPattern("uuuu.MM.dd.HH.mm.ss"));
+                }
+                session.storeRequestData(getID(), userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text, filter);
+                Toast.makeText(getApplicationContext(), "Successfully Created a Request", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MakeRequestsPage.this, GenerateOffersPage.class);
+                putUserData(intent);
+                startActivity(intent);
+            }
         });
+    }
+    public int getID() {
+        // return random 6 digit number for request id
+        return rand.nextInt(999999-111111)+111111;
+    }
+
+    public void getUserData() {
+        Intent intent = getIntent();
+
+        String nameUser = intent.getStringExtra("name");
+        String emailUser = intent.getStringExtra("email");
+        String dobUser = intent.getStringExtra("dob");
+        String passwordUser = intent.getStringExtra("password");
+
+        userInfo.put("name", nameUser);
+        userInfo.put("email", emailUser);
+        userInfo.put("dob", dobUser);
+        userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 }
