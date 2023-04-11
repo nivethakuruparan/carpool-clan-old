@@ -22,6 +22,8 @@ public class GenerateOffersPage extends AppCompatActivity {
     private final Map<String, String> userInfo = new HashMap<>();
     DatabaseReference reference;
 
+    DispatcherController dispatcher;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_offers_page);
@@ -30,6 +32,7 @@ public class GenerateOffersPage extends AppCompatActivity {
         SessionController session = new SessionController();
         reference = FirebaseDatabase.getInstance().getReference("offers");
         Query checkDatabase = reference.orderByChild("taxiID");
+        dispatcher = new DispatcherController();
 
         checkDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -52,6 +55,7 @@ public class GenerateOffersPage extends AppCompatActivity {
                         System.out.println("timestamp: " + offer.get("timestamp"));
                         System.out.println("destination: " + offer.get("destination"));
                     }
+
                 } else {
                     Toast.makeText(getApplicationContext(), "There are no offers that match your request at this time", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(GenerateOffersPage.this, MakeRequestsPage.class);
