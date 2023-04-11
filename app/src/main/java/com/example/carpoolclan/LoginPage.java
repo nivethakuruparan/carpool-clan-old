@@ -3,6 +3,7 @@ package com.example.carpoolclan;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -17,11 +18,16 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginPage extends AppCompatActivity {
-    AccountManagementController accountManagement = new AccountManagementController();
+    SessionController session;
+    AccountManagementController accountManagement;
     EditText loginEmail, loginPassword;
     Button loginButton;
     TextView registrationPageRedirect;
     DatabaseReference reference;
+    public LoginPage() {
+        accountManagement = new AccountManagementController();
+        session = new SessionController();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,12 +78,7 @@ public class LoginPage extends AppCompatActivity {
                         String dobFromDB = session.decrypt(snapshot.child(accountInfoHelper.email).child("dob").getValue(String.class));
 
                         Intent intent = new Intent(LoginPage.this, HomePage.class);
-
-                        intent.putExtra("name", nameFromDB);
-                        intent.putExtra("email", emailFromDB);
-                        intent.putExtra("dob", dobFromDB);
-                        intent.putExtra("password", passwordFromDB);
-
+                        session.setUserInfo(nameFromDB,emailFromDB,dobFromDB,passwordFromDB);
                         startActivity(intent);
                     } else {
                         loginPassword.setError("Invalid Credentials!");
