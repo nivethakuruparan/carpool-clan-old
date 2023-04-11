@@ -60,7 +60,4 @@ public class OfferInfoHelper {
         setDestination(destination);
         setNumPassengers(num_passengers);
     }
-
-    public OfferInfoHelper() {
-    }
 }

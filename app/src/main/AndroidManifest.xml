@@ -20,9 +20,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarpoolClan"
         tools:targetApi="31">
+        
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:theme="@style/SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".GoogleMapsInterface"
-            android:exported="false" >
+            android:exported="false">
         </activity>
         <activity
             android:name=".IncomingRequestsPage"
@@ -51,7 +63,7 @@
             android:exported="false" />
         <activity
             android:name=".HomePage"
-            android:exported="false"
+            android:exported="false">
         </activity>
 
         <activity
@@ -63,16 +75,12 @@
         </activity>
         <activity
             android:name=".LoginPage"
-            android:exported="false"
+            android:exported="false">
         </activity>
         <activity
             android:name=".WelcomePage"
-            android:exported="true"
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".MainActivity"

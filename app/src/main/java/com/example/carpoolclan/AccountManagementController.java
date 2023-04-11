@@ -81,7 +81,7 @@ public class AccountManagementController {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(text);
         if (!matcher.matches()) {
-            password.setError("Password must contain at least: one uppercase letter, one lowercase letter, one digit, and one symbol");
+            password.setError("Password must contain at least: one uppercase letter, one lowercase letter, one digit, one symbol and must be at least 8 characters");
             return false;
         }
         password.setError(null);

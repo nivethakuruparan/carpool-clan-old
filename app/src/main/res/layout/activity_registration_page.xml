@@ -1,107 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_one"
     android:fillViewport="true"
     android:scrollbars="vertical"
-    android:background="@drawable/background_one"
     tools:context=".RegistrationPage">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp"
-            android:background="@drawable/grey_border">
+            android:background="@drawable/grey_border"
+            android:orientation="vertical"
+            android:padding="24dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans_condensed_extrabold"
                 android:text="SIGN UP"
-                android:textSize="48sp"
                 android:textAlignment="center"
-                android:textColor="@color/amber_400"/>
+                android:textColor="@color/amber_400"
+                android:textSize="48sp" />
+
             <EditText
+                android:id="@+id/registration_name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/registration_name"
-                android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="First and Last Name"
-                android:inputType="text"
+                android:background="@drawable/grey_border"
                 android:drawableStart="@drawable/person"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                android:hint="First and Last Name"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="@color/black" />
+
             <EditText
+                android:id="@+id/registration_email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/registration_email"
-                android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
+                android:background="@drawable/grey_border"
                 android:drawableStart="@drawable/email"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:textColor="@color/black" />
+
             <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/registration_dob"
-            android:background="@drawable/grey_border"
-            android:layout_marginTop="20dp"
-            android:padding="8dp"
-            android:hint="Select Date of Birth"
-            android:textSize="18sp"
-            android:drawableLeft="@drawable/date"
-            android:gravity="center_vertical"
-            android:fontFamily="sans-serif"
-            android:drawablePadding="8dp"
-            android:textColor="@color/black"
-            android:onClick="openDatePicker"/>
-            <EditText
+                android:id="@+id/registration_dob"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/registration_password"
-                android:background="@drawable/grey_border"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/grey_border"
+                android:drawableLeft="@drawable/date"
+                android:drawablePadding="8dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:hint="Select Date of Birth"
+                android:onClick="openDatePicker"
                 android:padding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/registration_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/grey_border"
                 android:drawableStart="@drawable/lock"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/black" />
+
             <Button
+                android:id="@+id/registration_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:fontFamily="@font/opensans_condensed_semibold"
-                android:text="Sign Up"
-                android:id="@+id/registration_button"
-                android:textSize="28sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/amber_400"
-                app:cornerRadius = "20dp"/>
+                android:fontFamily="@font/opensans_condensed_semibold"
+                android:text="Sign Up"
+                android:textSize="28sp"
+                app:cornerRadius="20dp" />
+
             <TextView
+                android:id="@+id/login_page_redirect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/login_page_redirect"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Already a user? Login"
                 android:layout_gravity="center"
-                android:padding="8dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/opensans_semibold"
+                android:padding="8dp"
+                android:text="Already a user? Login"
                 android:textColor="@color/yellow_500"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </ScrollView>

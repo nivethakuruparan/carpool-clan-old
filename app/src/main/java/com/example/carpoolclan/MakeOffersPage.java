@@ -111,7 +111,7 @@ public class MakeOffersPage extends AppCompatActivity {
                 }
                 session.storeOfferData(id_text, userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text);
                 Toast.makeText(getApplicationContext(), "Successfully Created an Offer", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MakeOffersPage.this, MakeOffersPage.class);
+                Intent intent = new Intent(MakeOffersPage.this, HomePage.class);
                 putUserData(intent);
                 startActivity(intent);
             }
