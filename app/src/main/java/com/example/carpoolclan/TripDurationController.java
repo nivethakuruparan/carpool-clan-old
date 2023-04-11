@@ -9,6 +9,8 @@ public class TripDurationController {
     private String customerType;
     private String polyLine;
 
+    private static String tripID; // taxi id for current trip
+
     // the list of customerID's that is displayed to an individual user
     // every user will have a different customerIDs list
     private static List<String> customerIDs;
@@ -21,12 +23,19 @@ public class TripDurationController {
         polyLine = SessionController.getPolyLine();
 
         customerIDs = new ArrayList<>();
+        tripID = "062702";
 
         addRatingCard();
     }
 
     public boolean getTripStatus() {
         return tripStatus;
+    }
+    public void setTripStatus(String taxiID) {
+        tripID = taxiID;
+    }
+    public String getTripID() {
+        return tripID;
     }
 
     public String getCustomerType() {
