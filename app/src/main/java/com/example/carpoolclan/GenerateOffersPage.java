@@ -19,21 +19,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GenerateOffersPage extends AppCompatActivity {
-    private final Map<String, String> request = new HashMap<>();
-    SessionController session;
+    private final Map<String, String> userInfo = new HashMap<>();
     DatabaseReference reference;
 
-    public GenerateOffersPage() {
-        session = new SessionController();
-    }
+    DispatcherController dispatcher;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_offers_page);
-        getRequestInfo();
+        getUserData();
 
+        SessionController session = new SessionController();
         reference = FirebaseDatabase.getInstance().getReference("offers");
         Query checkDatabase = reference.orderByChild("taxiID");
+        dispatcher = new DispatcherController();
 
         checkDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -56,13 +55,16 @@ public class GenerateOffersPage extends AppCompatActivity {
                         System.out.println("timestamp: " + offer.get("timestamp"));
                         System.out.println("destination: " + offer.get("destination"));
                     }
+
                 } else {
                     Toast.makeText(getApplicationContext(), "There are no offers that match your request at this time", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(GenerateOffersPage.this, MakeRequestsPage.class);
+                    putUserData(intent);
                     startActivity(intent);
                 }
                 Toast.makeText(getApplicationContext(), "Offers successfully generated", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(GenerateOffersPage.this, PotentialOffersPage.class);
+                putUserData(intent);
                 startActivity(intent);
             }
 
@@ -72,15 +74,25 @@ public class GenerateOffersPage extends AppCompatActivity {
             }
         });
     }
-    public void getRequestInfo() {
+
+    public void getUserData() {
         Intent intent = getIntent();
 
-        request.put("requestID", intent.getStringExtra("requestID"));
-        request.put("customerID", intent.getStringExtra("customerID"));
-        request.put("time", intent.getStringExtra("time"));
-        request.put("start", intent.getStringExtra("start"));
-        request.put("destination", intent.getStringExtra("destination"));
-        request.put("numPassengers", intent.getStringExtra("numPassengers"));
-        request.put("filter", intent.getStringExtra("filter"));
+        String nameUser = intent.getStringExtra("name");
+        String emailUser = intent.getStringExtra("email");
+        String dobUser = intent.getStringExtra("dob");
+        String passwordUser = intent.getStringExtra("password");
+
+        userInfo.put("name", nameUser);
+        userInfo.put("email", emailUser);
+        userInfo.put("dob", dobUser);
+        userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 }
