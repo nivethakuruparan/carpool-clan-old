@@ -1,6 +1,7 @@
 package com.example.carpoolclan;
 
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,10 +33,13 @@ public class DispatcherController {
         return true;
     }
 
-    public Boolean validateUserInput(int num_passengers) {
-        if (0 <= num_passengers & num_passengers <= 4) {
+    public Boolean validateUserInput(EditText numPassengers) {
+        int num_passengers = Integer.parseInt(numPassengers.getText().toString());
+        if (2 <= num_passengers & num_passengers <= 4) {
+            numPassengers.setError(null);
             return true;
         }
+        numPassengers.setError("Please enter a valid number of passengers");
         return false;
     }
 

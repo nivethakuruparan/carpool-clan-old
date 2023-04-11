@@ -89,9 +89,8 @@ public class MakeRequestsPage extends AppCompatActivity {
                 // startingLocation, destination, numPassengers, filter cannot be empty
                 isValidated = false;
             } else {
-                // validate request; 0 <= numPassengers <= capacity (4)
-                int num_passengers = Integer.parseInt(numPassengers.getText().toString());
-                isValidated = dispatcher.validateUserInput(num_passengers);
+                // validate request; 2 <= numPassengers <= capacity (4)
+                isValidated = dispatcher.validateUserInput(numPassengers);
             }
 
             // redirect to generate offers page

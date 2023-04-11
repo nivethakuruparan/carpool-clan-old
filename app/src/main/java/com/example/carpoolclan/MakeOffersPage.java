@@ -91,9 +91,8 @@ public class MakeOffersPage extends AppCompatActivity {
                 // no fields can be empty
                 isValidated = false;
             } else {
-                // validate offer; 0 <= numPassengers <= capacity (4)
-                int num_passengers = Integer.parseInt(numPassengers.getText().toString());
-                isValidated = dispatcher.validateUserInput(num_passengers);
+                // validate offer; 2 <= numPassengers <= capacity (4)
+                isValidated = dispatcher.validateUserInput(numPassengers);
             }
 
             // redirect to incoming request page? or home page with the state that users have successfully made an offer
