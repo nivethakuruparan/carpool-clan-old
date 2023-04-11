@@ -8,5 +8,5 @@
     android:fillViewport="true"
     android:scrollbars="vertical"
     android:background="@drawable/background_one"
-    tools:context=".GenerateRequestsPage">
+    tools:context=".GenerateOffersPage">
 </ScrollView>

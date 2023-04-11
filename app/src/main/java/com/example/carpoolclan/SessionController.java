@@ -14,7 +14,7 @@ public class SessionController {
     public SessionController() {
         secret = "design";
         encryption = new EncryptionController();
-        tripStatus = true;
+        tripStatus = false;
         customerType = "offerer";
         polyLine = "{qagGt_`gNmDc@`@sFbA_Oh@iIn@{JJmAjAeHDOGKi@{@cAuAUKWOgAe@oH_D_E_Ba@[iA{AcA_Bo@aAoAeB{C}DiAoAm@q@w@kA[}@";
     }
@@ -25,16 +25,16 @@ public class SessionController {
         reference.child(accountInfoHelper.email).setValue(accountInfoHelper);
     }
 
-    protected void storeOfferData(String taxi_id, String destination, String num_passengers) {
+    protected void storeOfferData(String taxi_id, String customer_id, String time, String start, String destination, String num_passengers) {
         reference = FirebaseDatabase.getInstance().getReference("offers");
-        OfferInfoHelper offerInfoHelper = new OfferInfoHelper(encrypt(taxi_id), encrypt(destination), encrypt(num_passengers));
-        reference.child(offerInfoHelper.id).setValue(offerInfoHelper);
+        OfferInfoHelper offerInfoHelper = new OfferInfoHelper(encrypt(taxi_id), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers));
+        reference.child(offerInfoHelper.taxiID).setValue(offerInfoHelper);
     }
 
-    protected void storeRequestData(int id, String start, String destination, String num_passengers, String filter) {
+    protected void storeRequestData(int request_id, String customer_id, String time, String start, String destination, String num_passengers, String filter) {
         reference = FirebaseDatabase.getInstance().getReference("requests");
-        RequestInfoHelper requestInfoHelper = new RequestInfoHelper(encrypt(String.valueOf(id)), encrypt(start), encrypt(destination), encrypt(num_passengers), encrypt(filter));
-        reference.child(String.valueOf(requestInfoHelper.id)).setValue(requestInfoHelper);
+        RequestInfoHelper requestInfoHelper = new RequestInfoHelper(encrypt(String.valueOf(request_id)), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers), encrypt(filter));
+        reference.child(String.valueOf(requestInfoHelper.requestID)).setValue(requestInfoHelper);
     }
 
     protected String encrypt(String input) {

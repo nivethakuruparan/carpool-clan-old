@@ -1,14 +1,30 @@
 package com.example.carpoolclan;
 
 public class RequestInfoHelper {
-    String id, start, destination, num_passengers, filter;
+    String requestID, customerID, time, start, destination, numPassengers, filter;
 
-    public String getID() {
-        return id.replaceAll("@", "/");
+    public String getRequestID() {
+        return requestID.replaceAll("@", "/");
     }
 
-    public void setID(String id) {
-        this.id = id.replaceAll("/","@");
+    public void setRequestID(String request_id) {
+        this.requestID = request_id.replaceAll("/","@");
+    }
+
+    public String getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(String customer_id) {
+        this.customerID = customer_id;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getStart() {
@@ -28,11 +44,11 @@ public class RequestInfoHelper {
     }
 
     public String getNumPassengers() {
-        return num_passengers;
+        return numPassengers;
     }
 
     public void setNumPassengers(String num_passengers) {
-        this.num_passengers = num_passengers;
+        this.numPassengers = num_passengers;
     }
 
     public String getFilter() {
@@ -43,8 +59,10 @@ public class RequestInfoHelper {
         this.filter = filter;
     }
 
-    public RequestInfoHelper(String id, String start, String destination, String num_passengers, String filter) {
-        setID(id);
+    public RequestInfoHelper(String request_id, String customer_id, String time, String start, String destination, String num_passengers, String filter) {
+        setRequestID(request_id);
+        setCustomerID(customer_id);
+        setTime(time);
         setStart(start);
         setDestination(destination);
         setNumPassengers(num_passengers);

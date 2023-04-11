@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HomePage extends AppCompatActivity {
-    private final Map<String, Object> userInfo = new HashMap<>();
+    private final Map<String, String> userInfo = new HashMap<>();
 
     TripDurationController tripDuration;
     TextView manageAccountPageRedirect, tripStatus, customerType, customerID, tripTime, numPassengers, fare, destination;
@@ -57,18 +57,32 @@ public class HomePage extends AppCompatActivity {
         // let users go back to the manage account page, normally
         manageAccountPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, ManageAccountPage.class);
+
+            intent.putExtra("name", userInfo.get("name"));
+            intent.putExtra("email", userInfo.get("email"));
+            intent.putExtra("dob", userInfo.get("dob"));
+            intent.putExtra("password", userInfo.get("password"));
+
             startActivity(intent);
         });
 
         // let users go back to the make offer page, normally
         makeOffersPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MakeOffersPage.class);
+
+            intent.putExtra("name", userInfo.get("name"));
+            intent.putExtra("email", userInfo.get("email"));
+
             startActivity(intent);
         });
 
         // let users go back to the make requests page, normally
         makeRequestsPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MakeRequestsPage.class);
+
+            intent.putExtra("name", userInfo.get("name"));
+            intent.putExtra("email", userInfo.get("email"));
+
             startActivity(intent);
         });
 

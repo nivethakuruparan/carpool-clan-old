@@ -12,10 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class MakeRequestsPage extends AppCompatActivity {
-
+    private final Map<String, String> userInfo = new HashMap<>();
     DispatcherController dispatcher;
     TextView homePageRedirect;
     EditText numPassengers;
@@ -29,6 +34,7 @@ public class MakeRequestsPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_requests_page);
+        getUserData();
 
         //initializing dispatcher
         dispatcher = new DispatcherController();
@@ -95,14 +101,35 @@ public class MakeRequestsPage extends AppCompatActivity {
             // redirect to potential offers page
             if (isValidated) {
                 SessionController session = new SessionController();
-                session.storeRequestData(getID(), start_text, destination_text, num_passengers_text, filter);
+                String current_time = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    current_time = ZonedDateTime
+                            .now(ZoneId.systemDefault())
+                            .format(DateTimeFormatter.ofPattern("uuuu.MM.dd.HH.mm.ss"));
+                }
+                session.storeRequestData(getID(), userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text, filter);
                 Toast.makeText(getApplicationContext(), "Successfully Created a Request", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MakeRequestsPage.this, PotentialOffersPage.class);
+                Intent intent = new Intent(MakeRequestsPage.this, GenerateOffersPage.class);
+
+                intent.putExtra("name", userInfo.get("name"));
+                intent.putExtra("email", userInfo.get("email"));
+
                 startActivity(intent);
             }
         });
     }
     public int getID() {
-        return rand.nextInt(999999);
+        // return random 6 digit number for request id
+        return rand.nextInt(999999-111111)+111111;
+    }
+
+    public void getUserData() {
+        Intent intent = getIntent();
+
+        String nameUser = intent.getStringExtra("name");
+        String emailUser = intent.getStringExtra("email");
+
+        userInfo.put("name", nameUser);
+        userInfo.put("email", emailUser);
     }
 }

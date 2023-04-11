@@ -1,14 +1,38 @@
 package com.example.carpoolclan;
 
 public class OfferInfoHelper {
-    String id, destination, num_passengers;
+    String taxiID, customerID, time, start, destination, numPassengers;
 
-    public String getID() {
-        return id.replaceAll("@", "/");
+    public String getTaxiID() {
+        return taxiID.replaceAll("@", "/");
     }
 
-    public void setID(String id) {
-        this.id = id.replaceAll("/","@");
+    public void setTaxiID(String taxi_id) {
+        this.taxiID = taxi_id.replaceAll("/","@");
+    }
+
+    public String customerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(String customer_id) {
+        this.customerID = customer_id;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
     }
 
     public String getDestination() {
@@ -20,15 +44,19 @@ public class OfferInfoHelper {
     }
 
     public String getNumPassengers() {
-        return num_passengers;
+        return numPassengers;
     }
 
     public void setNumPassengers(String num_passengers) {
-        this.num_passengers = num_passengers;
+        this.numPassengers = num_passengers;
     }
 
-    public OfferInfoHelper(String id, String destination, String num_passengers) {
-        setID(id);
+
+    public OfferInfoHelper(String taxi_id, String customer_id, String time, String start, String destination, String num_passengers) {
+        setTaxiID(taxi_id);
+        setCustomerID(customer_id);
+        setTime(time);
+        setStart(start);
         setDestination(destination);
         setNumPassengers(num_passengers);
     }
