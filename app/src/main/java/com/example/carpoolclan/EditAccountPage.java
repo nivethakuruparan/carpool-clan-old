@@ -36,6 +36,10 @@ public class EditAccountPage extends AppCompatActivity {
         editPassword = findViewById(R.id.edit_password);
         confirmEdits = findViewById(R.id.confirm_edits_button);
 
+        editName.setText(userInfo.get("name"));
+        editDOB.setText(userInfo.get("dob"));
+        editPassword.setText(userInfo.get("password"));
+
         manageAccountPageRedirect.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(EditAccountPage.this);
             builder.setMessage("Are you sure you want to leave this page? Any changes you made will not be saved.");
@@ -45,6 +49,7 @@ public class EditAccountPage extends AppCompatActivity {
             builder.setPositiveButton("Yes", (dialog, which) -> {
                 Toast.makeText(getApplicationContext(), "Your changes have not been saved", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(EditAccountPage.this, ManageAccountPage.class);
+                putUserData(intent);
                 startActivity(intent);
             });
 
@@ -74,12 +79,7 @@ public class EditAccountPage extends AppCompatActivity {
                 // display success message and redirect to manage account page
                 Toast.makeText(getApplicationContext(), "Your changes have been saved", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(EditAccountPage.this, ManageAccountPage.class);
-
-                intent.putExtra("name", name);
-                intent.putExtra("email", userInfo.get("email"));
-                intent.putExtra("dob", dob);
-                intent.putExtra("password", password);
-
+                putUserData(intent);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "There was an error with your changes", Toast.LENGTH_LONG).show();
@@ -98,6 +98,13 @@ public class EditAccountPage extends AppCompatActivity {
         userInfo.put("email", emailUser);
         userInfo.put("dob", dobUser);
         userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 
     private void initDatePicker() {

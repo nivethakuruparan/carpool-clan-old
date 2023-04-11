@@ -57,36 +57,21 @@ public class HomePage extends AppCompatActivity {
         // let users go back to the manage account page, normally
         manageAccountPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, ManageAccountPage.class);
-
-            intent.putExtra("name", userInfo.get("name"));
-            intent.putExtra("email", userInfo.get("email"));
-            intent.putExtra("dob", userInfo.get("dob"));
-            intent.putExtra("password", userInfo.get("password"));
-
+            putUserData(intent);
             startActivity(intent);
         });
 
         // let users go back to the make offer page, normally
         makeOffersPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MakeOffersPage.class);
-
-            intent.putExtra("name", userInfo.get("name"));
-            intent.putExtra("email", userInfo.get("email"));
-            intent.putExtra("dob", userInfo.get("dob"));
-            intent.putExtra("password", userInfo.get("password"));
-
+            putUserData(intent);
             startActivity(intent);
         });
 
         // let users go back to the make requests page, normally
         makeRequestsPageRedirect.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MakeRequestsPage.class);
-
-            intent.putExtra("name", userInfo.get("name"));
-            intent.putExtra("email", userInfo.get("email"));
-            intent.putExtra("dob", userInfo.get("dob"));
-            intent.putExtra("password", userInfo.get("password"));
-
+            putUserData(intent);
             startActivity(intent);
         });
 
@@ -190,5 +175,12 @@ public class HomePage extends AppCompatActivity {
         userInfo.put("email", emailUser);
         userInfo.put("dob", dobUser);
         userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 }

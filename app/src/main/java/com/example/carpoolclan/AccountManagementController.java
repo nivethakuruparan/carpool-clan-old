@@ -119,8 +119,10 @@ public class AccountManagementController {
         }
     }
 
-    public Boolean deleteAccount() {
+    public Boolean deleteAccount(String email) {
         System.out.println("Deleting Account");
+        SessionController session = new SessionController();
+        session.deleteAccount(email);
         return true;
     }
 

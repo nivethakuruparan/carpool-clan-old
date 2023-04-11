@@ -55,16 +55,12 @@ public class GenerateOffersPage extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "There are no offers that match your request at this time", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(GenerateOffersPage.this, MakeRequestsPage.class);
-
-                    intent.putExtra("name", userInfo.get("name"));
-                    intent.putExtra("email", userInfo.get("email"));
-                    intent.putExtra("dob", userInfo.get("dob"));
-                    intent.putExtra("password", userInfo.get("password"));
-
+                    putUserData(intent);
                     startActivity(intent);
                 }
                 Toast.makeText(getApplicationContext(), "Offers successfully generated", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(GenerateOffersPage.this, PotentialOffersPage.class);
+                putUserData(intent);
                 startActivity(intent);
             }
 
@@ -87,5 +83,12 @@ public class GenerateOffersPage extends AppCompatActivity {
         userInfo.put("email", emailUser);
         userInfo.put("dob", dobUser);
         userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 }

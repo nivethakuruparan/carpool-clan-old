@@ -35,10 +35,6 @@ public class MakeOffersPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_offers_page);
         getUserData();
-        System.out.println(userInfo.get("name"));
-        System.out.println(userInfo.get("email"));
-        System.out.println(userInfo.get("dob"));
-        System.out.println(userInfo.get("password"));
 
         //initializing dispatcher
         dispatcher = new DispatcherController();
@@ -65,6 +61,7 @@ public class MakeOffersPage extends AppCompatActivity {
             builder.setPositiveButton("Yes", (dialog, which) -> {
                 Toast.makeText(getApplicationContext(), "Your changes have not been saved", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MakeOffersPage.this, HomePage.class);
+                putUserData(intent);
                 startActivity(intent);
             });
 
@@ -117,12 +114,7 @@ public class MakeOffersPage extends AppCompatActivity {
                 session.storeOfferData(id_text, userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text);
                 Toast.makeText(getApplicationContext(), "Successfully Created an Offer", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MakeOffersPage.this, GenerateOffersPage.class);
-
-                intent.putExtra("name", userInfo.get("name"));
-                intent.putExtra("email", userInfo.get("email"));
-                intent.putExtra("dob", userInfo.get("dob"));
-                intent.putExtra("password", userInfo.get("password"));
-
+                putUserData(intent);
                 startActivity(intent);
             }
         });
@@ -155,5 +147,12 @@ public class MakeOffersPage extends AppCompatActivity {
         userInfo.put("email", emailUser);
         userInfo.put("dob", dobUser);
         userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 }

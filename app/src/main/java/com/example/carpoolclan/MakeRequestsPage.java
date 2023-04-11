@@ -110,12 +110,7 @@ public class MakeRequestsPage extends AppCompatActivity {
                 session.storeRequestData(getID(), userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text, filter);
                 Toast.makeText(getApplicationContext(), "Successfully Created a Request", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MakeRequestsPage.this, GenerateOffersPage.class);
-
-                intent.putExtra("name", userInfo.get("name"));
-                intent.putExtra("email", userInfo.get("email"));
-                intent.putExtra("dob", userInfo.get("dob"));
-                intent.putExtra("password", userInfo.get("password"));
-
+                putUserData(intent);
                 startActivity(intent);
             }
         });
@@ -137,5 +132,12 @@ public class MakeRequestsPage extends AppCompatActivity {
         userInfo.put("email", emailUser);
         userInfo.put("dob", dobUser);
         userInfo.put("password", passwordUser);
+    }
+
+    public void putUserData(Intent intent) {
+        intent.putExtra("name", userInfo.get("name"));
+        intent.putExtra("email", userInfo.get("email"));
+        intent.putExtra("dob", userInfo.get("dob"));
+        intent.putExtra("password", userInfo.get("password"));
     }
 }

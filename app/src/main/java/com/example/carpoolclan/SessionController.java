@@ -27,7 +27,6 @@ public class SessionController {
 
     protected void storeOfferData(String taxi_id, String customer_id, String time, String start, String destination, String num_passengers) {
         reference = FirebaseDatabase.getInstance().getReference("offers");
-        System.out.println(customer_id);
         OfferInfoHelper offerInfoHelper = new OfferInfoHelper(encrypt(taxi_id), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers));
         reference.child(offerInfoHelper.taxiID).setValue(offerInfoHelper);
     }
@@ -36,6 +35,13 @@ public class SessionController {
         reference = FirebaseDatabase.getInstance().getReference("requests");
         RequestInfoHelper requestInfoHelper = new RequestInfoHelper(encrypt(String.valueOf(request_id)), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers), encrypt(filter));
         reference.child(String.valueOf(requestInfoHelper.requestID)).setValue(requestInfoHelper);
+    }
+
+    protected void deleteAccount(String email) {
+        reference = FirebaseDatabase.getInstance().getReference("customers");
+        AccountInfoHelper accountInfoHelper = new AccountInfoHelper();
+        accountInfoHelper.setEmail(encrypt(email));
+        reference.child(accountInfoHelper.email).removeValue();
     }
 
     protected String encrypt(String input) {
