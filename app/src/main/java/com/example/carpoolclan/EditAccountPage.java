@@ -77,6 +77,10 @@ public class EditAccountPage extends AppCompatActivity {
                 SessionController session = new SessionController();
                 session.storeRegistrationData(name, userInfo.get("email"), dob, password);
                 // display success message and redirect to manage account page
+                userInfo.put("name", name);
+                userInfo.put("dob", dob);
+                userInfo.put("password", password);
+
                 Toast.makeText(getApplicationContext(), "Your changes have been saved", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(EditAccountPage.this, ManageAccountPage.class);
                 putUserData(intent);
