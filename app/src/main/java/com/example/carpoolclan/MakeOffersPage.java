@@ -22,19 +22,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MakeOffersPage extends AppCompatActivity {
-    private final Map<String, String> userInfo = new HashMap<>();
+    private final Map<String, String> userInfo;
+    SessionController session;
     DispatcherController dispatcher;
     Button scanQRCode, confirmMakeOffer;
     TextView homePageRedirect, textQRCode;
     String finalTaxiCode;
     AutoCompleteTextView startingLocation, destination;
     EditText numPassengers;
+    public MakeOffersPage() {
+        session = new SessionController();
+        userInfo = session.getUserInfo();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_offers_page);
-        getUserData();
 
         //initializing dispatcher
         dispatcher = new DispatcherController();
@@ -61,7 +65,6 @@ public class MakeOffersPage extends AppCompatActivity {
             builder.setPositiveButton("Yes", (dialog, which) -> {
                 Toast.makeText(getApplicationContext(), "Your changes have not been saved", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MakeOffersPage.this, HomePage.class);
-                putUserData(intent);
                 startActivity(intent);
             });
 
@@ -102,17 +105,16 @@ public class MakeOffersPage extends AppCompatActivity {
                 String destination_text = destination.getText().toString();
                 String num_passengers_text = numPassengers.getText().toString();
 
-                SessionController session = new SessionController();
                 String current_time = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     current_time = ZonedDateTime
                             .now(ZoneId.systemDefault())
                             .format(DateTimeFormatter.ofPattern("uuuu.MM.dd.HH.mm.ss"));
                 }
+
                 session.storeOfferData(id_text, userInfo.get("email"), current_time, start_text, destination_text, num_passengers_text);
                 Toast.makeText(getApplicationContext(), "Successfully Created an Offer", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MakeOffersPage.this, MakeOffersPage.class);
-                putUserData(intent);
                 startActivity(intent);
             }
         });
@@ -131,26 +133,5 @@ public class MakeOffersPage extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    public void getUserData() {
-        Intent intent = getIntent();
-
-        String nameUser = intent.getStringExtra("name");
-        String emailUser = intent.getStringExtra("email");
-        String dobUser = intent.getStringExtra("dob");
-        String passwordUser = intent.getStringExtra("password");
-
-        userInfo.put("name", nameUser);
-        userInfo.put("email", emailUser);
-        userInfo.put("dob", dobUser);
-        userInfo.put("password", passwordUser);
-    }
-
-    public void putUserData(Intent intent) {
-        intent.putExtra("name", userInfo.get("name"));
-        intent.putExtra("email", userInfo.get("email"));
-        intent.putExtra("dob", userInfo.get("dob"));
-        intent.putExtra("password", userInfo.get("password"));
     }
 }

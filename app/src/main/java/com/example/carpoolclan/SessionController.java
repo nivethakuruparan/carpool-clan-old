@@ -3,10 +3,13 @@ package com.example.carpoolclan;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.HashMap;
+
 public class SessionController {
     DatabaseReference reference;
     final String secret;
     EncryptionController encryption;
+    private static HashMap<String,String> userInfo = new HashMap<>();
     private static Boolean tripStatus; // false for no trip; true for current trip
     private static String customerType; // "offerer, requester"
     private static String polyLine; // current polyLine being used on the trip
@@ -31,9 +34,9 @@ public class SessionController {
         reference.child(offerInfoHelper.taxiID).setValue(offerInfoHelper);
     }
 
-    protected void storeRequestData(int request_id, String customer_id, String time, String start, String destination, String num_passengers, String filter) {
+    protected void storeRequestData(String request_id, String customer_id, String time, String start, String destination, String num_passengers, String filter) {
         reference = FirebaseDatabase.getInstance().getReference("requests");
-        RequestInfoHelper requestInfoHelper = new RequestInfoHelper(encrypt(String.valueOf(request_id)), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers), encrypt(filter));
+        RequestInfoHelper requestInfoHelper = new RequestInfoHelper(encrypt(request_id), encrypt(customer_id), encrypt(time), encrypt(start), encrypt(destination), encrypt(num_passengers), encrypt(filter));
         reference.child(String.valueOf(requestInfoHelper.requestID)).setValue(requestInfoHelper);
     }
 
@@ -44,6 +47,22 @@ public class SessionController {
         reference.child(accountInfoHelper.email).removeValue();
     }
 
+    public static void setUserInfo(String name, String email, String dob, String password) {
+        userInfo.put("name", name);
+        userInfo.put("email", email);
+        userInfo.put("dob", dob);
+        userInfo.put("password", password);
+    }
+
+    public static void updateUserInfo(String name, String dob, String password) {
+        userInfo.replace("name", name);
+        userInfo.replace("dob", dob);
+        userInfo.replace("password", password);
+    }
+
+    public static HashMap<String, String> getUserInfo() {
+        return userInfo;
+    }
     protected String encrypt(String input) {
         return encryption.encrypt(input, secret);
     }
