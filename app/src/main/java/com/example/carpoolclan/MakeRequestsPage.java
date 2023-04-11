@@ -90,7 +90,7 @@ public class MakeRequestsPage extends AppCompatActivity {
                 isValidated = false;
             } else {
                 // validate request; 0 <= numPassengers <= capacity (4)
-                int num_passengers = Integer.getInteger(numPassengers.getText().toString());
+                int num_passengers = Integer.parseInt(numPassengers.getText().toString());
                 isValidated = dispatcher.validateUserInput(num_passengers);
             }
 
