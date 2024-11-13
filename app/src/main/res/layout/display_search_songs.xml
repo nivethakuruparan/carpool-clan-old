@@ -1,0 +1,67 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:padding="24dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_condensed_extrabold"
+            android:text="SEARCH SONG"
+            android:textSize="36sp"
+            android:textAlignment="center"
+            android:textColor="@color/amber_400"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/search_song_name"
+            android:background="@drawable/grey_border"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:hint="Song Name"
+            android:inputType="text"
+            android:drawableStart="@drawable/music_note"
+            android:drawablePadding="8dp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/search_song_artist"
+            android:background="@drawable/grey_border"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:hint="Artist Name"
+            android:inputType="text"
+            android:drawableStart="@drawable/person"
+            android:drawablePadding="8dp"
+            android:textColor="@color/black"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:fontFamily="@font/opensans_condensed_semibold"
+            android:text="Find Song"
+            android:id="@+id/search_song_button"
+            android:textSize="28sp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/amber_400"
+            app:cornerRadius = "20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_songs_back_redirect"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Go Back To Playlist"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/yellow_500"
+            android:textAlignment="center"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

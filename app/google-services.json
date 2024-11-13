@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "663173276821",
+    "project_id": "carpoolclan",
+    "storage_bucket": "carpoolclan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663173276821:android:faceac147360ff20a7679c",
+        "android_client_info": {
+          "package_name": "com.example.carpoolclan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663173276821-lsmniol6jc9e28mbm06fbtn6klru5qoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVfLXs9Wq8itBoQGy8kiUbY1Avm93jVdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663173276821-lsmniol6jc9e28mbm06fbtn6klru5qoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

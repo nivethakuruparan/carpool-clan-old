@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/background_five"
+    tools:context=".PotentialOffersPage">
+    <TextView
+        android:id="@+id/home_page_redirect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:drawableLeftCompat="@drawable/back_arrow" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_condensed_extrabold"
+        android:text="Potential Offers"
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        android:layout_marginTop="10dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/potential_offers_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
